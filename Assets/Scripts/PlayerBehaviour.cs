@@ -7,12 +7,23 @@ public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private float Speed;
     [SerializeField] private float MaxSpeed;
+
+    //[SerializeField] private float TurnSpeed;
     
     private Controls controls;
     private Vector2 direction;
     private Vector3 PlayerDirection;
 
+    private Vector2 AimDirection;
+
     private Rigidbody Myrb;
+
+    /*private Vector3 playerdirection;
+    private Vector3 relativdirection;
+
+    private Vector3 LookForward;
+    private Quaternion PlayerRotation;*/
+
 
     private void OnEnable()
     {
@@ -21,6 +32,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         controls.Player.Move.performed += OnMovePerformed;
         controls.Player.Move.canceled += OnMoveCanceled;
+
+        controls.Player.Aim.performed += OnAimPerformed;
 
         Myrb = GetComponent<Rigidbody>();
     }
@@ -40,16 +53,32 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Myrb.AddForce(PlayerDirection * Speed);
         }
+
+        /*relativdirection = Camera.main.transform.TransformDirection(playerdirection);
+        relativdirection.y = 0;
+        relativdirection.Normalize();
+
+        LookForward = Vector3.RotateTowards(this.transform.forward, relativdirection, TurnSpeed * Time.fixedDeltaTime, 0);
+        PlayerRotation = Quaternion.LookRotation(LookForward);
+
+        Myrb.MovePosition(Myrb.position + relativdirection * Speed);
+        Myrb.MoveRotation(PlayerRotation);*/
+
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<Vector2>();
-        Debug.Log(direction);
+        //Debug.Log(direction);
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext obj)
     {
         direction = Vector2.zero;
+    }
+
+    private void OnAimPerformed(InputAction.CallbackContext obj)
+    {
+        AimDirection = obj.ReadValue<Vector2>();
     }
 }
