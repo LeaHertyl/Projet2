@@ -156,17 +156,6 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b93088bf-a98a-4ee4-b2a6-e01afa0e289f"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5adcb1e9-9a54-4218-9e2f-b56ffb8440ff"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -188,6 +177,96 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""P2"",
+            ""id"": ""28948f32-c1c2-4d1a-8e40-664045679d43"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""a0136a9c-0cd8-4da9-85d4-f220b903623d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim2"",
+                    ""type"": ""Value"",
+                    ""id"": ""a0a710fc-5f40-47d1-a7cc-642360a0f4f9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""arrows"",
+                    ""id"": ""bef831bb-9f63-4acf-8393-2d6293d08204"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""1b9b5d66-0a0f-44de-a6a5-772479beb291"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""20be7f3d-ce65-4b84-8821-6f7922ece60a"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ed2a1753-7884-45d4-93d3-5cd008c351e0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0a14d948-6cf4-4d80-b923-1cbce0113e20"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9580165d-97fb-4a71-a0d7-6e79772302ea"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -197,6 +276,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        // P2
+        m_P2 = asset.FindActionMap("P2", throwIfNotFound: true);
+        m_P2_Move = m_P2.FindAction("Move", throwIfNotFound: true);
+        m_P2_Aim2 = m_P2.FindAction("Aim2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -291,10 +374,56 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // P2
+    private readonly InputActionMap m_P2;
+    private IP2Actions m_P2ActionsCallbackInterface;
+    private readonly InputAction m_P2_Move;
+    private readonly InputAction m_P2_Aim2;
+    public struct P2Actions
+    {
+        private @Controls m_Wrapper;
+        public P2Actions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_P2_Move;
+        public InputAction @Aim2 => m_Wrapper.m_P2_Aim2;
+        public InputActionMap Get() { return m_Wrapper.m_P2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(P2Actions set) { return set.Get(); }
+        public void SetCallbacks(IP2Actions instance)
+        {
+            if (m_Wrapper.m_P2ActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
+                @Aim2.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnAim2;
+                @Aim2.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnAim2;
+                @Aim2.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnAim2;
+            }
+            m_Wrapper.m_P2ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Aim2.started += instance.OnAim2;
+                @Aim2.performed += instance.OnAim2;
+                @Aim2.canceled += instance.OnAim2;
+            }
+        }
+    }
+    public P2Actions @P2 => new P2Actions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface IP2Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnAim2(InputAction.CallbackContext context);
     }
 }
