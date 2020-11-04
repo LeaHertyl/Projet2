@@ -10,6 +10,9 @@ public class PlayerBehaviour : MonoBehaviour
     
     private Controls controls;
     private Vector2 direction;
+    private Vector3 PlayerDirection;
+
+    private Rigidbody Myrb;
 
     private void OnEnable()
     {
@@ -18,6 +21,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         controls.Player.Move.performed += OnMovePerformed;
         controls.Player.Move.canceled += OnMoveCanceled;
+
+        Myrb = GetComponent<Rigidbody>();
     }
 
     // Start is called before the first frame update
@@ -29,7 +34,12 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        PlayerDirection = new Vector3(direction.x, 0, direction.y);
+
+        if(Myrb.velocity.sqrMagnitude < MaxSpeed)
+        {
+            Myrb.AddForce(PlayerDirection * Speed);
+        }
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -40,6 +50,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnMoveCanceled(InputAction.CallbackContext obj)
     {
-
+        direction = Vector2.zero;
     }
 }
