@@ -1220,6 +1220,7 @@ MonoBehaviour:
   Speed: 5
   MaxSpeed: 60
   Gravity: -2
+  Camera: {fileID: 1164840361}
   TurnSpeed: 0
 --- !u!143 &1898752400
 CharacterController:
