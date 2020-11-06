@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float Speed;
     [SerializeField] private float MaxSpeed;
     [SerializeField] private float Gravity;
-
+    [SerializeField] Transform Camera;
     [SerializeField] private float TurnSpeed;
     
     private Controls controls;
@@ -20,7 +20,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
 
-    private Vector2 AimDirection;
+    private float TurnSmoothTime;
+    private float TurnSmoothVelocity;
 
 
     private void OnEnable()
@@ -34,6 +35,8 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Aim.performed += OnAimPerformed;
 
         controller = GetComponent<CharacterController>();
+
+        TurnSmoothTime = 0f;
     }
 
     // Start is called before the first frame update
@@ -48,12 +51,19 @@ public class PlayerBehaviour : MonoBehaviour
         PlayerDirection = new Vector3(direction.x, 0, direction.y);
         DirectionToMove = new Vector3(PlayerDirection.x, Gravity, PlayerDirection.z);
 
-        TurnDirection = new Vector3(0, turn.y, 0);
+        /*TurnDirection = new Vector3(0, turn.y, 0);
         gameObject.transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
 
-        DirectionToMove = transform.TransformDirection(DirectionToMove);
+        DirectionToMove = transform.TransformDirection(DirectionToMove);*/
 
-        controller.Move(DirectionToMove * Speed * Time.deltaTime);
+        //controller.Move(DirectionToMove * Speed * Time.deltaTime);
+
+        float TargetAngle = Mathf.Atan2(PlayerDirection.x, PlayerDirection.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
+        float Angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref TurnSmoothVelocity, TurnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, Angle, 0f);
+
+        Vector3 MoveDirection = Quaternion.Euler(0f, TargetAngle, 0f) * DirectionToMove;
+        controller.Move(MoveDirection * Speed * Time.deltaTime);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
