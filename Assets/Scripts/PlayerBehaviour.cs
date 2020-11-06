@@ -33,6 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Move.canceled += OnMoveCanceled;
 
         controls.Player.Aim.performed += OnAimPerformed;
+        controls.Player.Aim.canceled += OnAimPerformed;
 
         controller = GetComponent<CharacterController>();
 
@@ -50,20 +51,20 @@ public class PlayerBehaviour : MonoBehaviour
     {
         PlayerDirection = new Vector3(direction.x, 0, direction.y);
         DirectionToMove = new Vector3(PlayerDirection.x, Gravity, PlayerDirection.z);
+        TurnDirection = new Vector3(0, turn.x, 0);
 
-        /*TurnDirection = new Vector3(0, turn.y, 0);
-        gameObject.transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
-
-        DirectionToMove = transform.TransformDirection(DirectionToMove);*/
-
-        //controller.Move(DirectionToMove * Speed * Time.deltaTime);
+        /*DirectionToMove = transform.TransformDirection(DirectionToMove); //Necessaire
 
         float TargetAngle = Mathf.Atan2(PlayerDirection.x, PlayerDirection.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
         float Angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref TurnSmoothVelocity, TurnSmoothTime);
         transform.rotation = Quaternion.Euler(0f, Angle, 0f);
 
-        Vector3 MoveDirection = Quaternion.Euler(0f, TargetAngle, 0f) * DirectionToMove;
-        controller.Move(MoveDirection * Speed * Time.deltaTime);
+        Vector3 MoveDirection = Quaternion.Euler(0f, TargetAngle, 0f) * (DirectionToMove);
+        controller.Move(MoveDirection * Speed * Time.deltaTime);*/
+
+        transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
+        DirectionToMove = transform.TransformDirection(DirectionToMove);
+        controller.Move(DirectionToMove * Speed * Time.deltaTime);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -81,6 +82,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         turn = obj.ReadValue<Vector2>();
         Debug.Log(turn);
+    }
+
+    private void OnAimCanceled(InputAction.CallbackContext obj)
+    {
+        turn = Vector2.zero;
     }
 
 }
