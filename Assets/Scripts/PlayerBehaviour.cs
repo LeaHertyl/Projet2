@@ -20,8 +20,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
 
-    private float TurnSmoothTime;
-    private float TurnSmoothVelocity;
+    /*private float TurnSmoothTime;
+    private float TurnSmoothVelocity;*/
 
 
     private void OnEnable()
@@ -37,7 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
 
-        TurnSmoothTime = 0f;
+        //TurnSmoothTime = 0f;
     }
 
     // Start is called before the first frame update
@@ -53,6 +53,11 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove = new Vector3(PlayerDirection.x, Gravity, PlayerDirection.z);
         TurnDirection = new Vector3(0, turn.x, 0);
 
+        transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
+        DirectionToMove = transform.TransformDirection(DirectionToMove);
+        controller.Move(DirectionToMove * Speed * Time.deltaTime);
+
+        //Brackeys mode -> doesn't work meh
         /*DirectionToMove = transform.TransformDirection(DirectionToMove); //Necessaire
 
         float TargetAngle = Mathf.Atan2(PlayerDirection.x, PlayerDirection.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
@@ -61,10 +66,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         Vector3 MoveDirection = Quaternion.Euler(0f, TargetAngle, 0f) * (DirectionToMove);
         controller.Move(MoveDirection * Speed * Time.deltaTime);*/
-
-        transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
-        DirectionToMove = transform.TransformDirection(DirectionToMove);
-        controller.Move(DirectionToMove * Speed * Time.deltaTime);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
