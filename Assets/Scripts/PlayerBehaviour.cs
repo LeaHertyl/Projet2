@@ -7,22 +7,20 @@ public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private float Speed;
     [SerializeField] private float MaxSpeed;
+    [SerializeField] private float Gravity;
 
-    //[SerializeField] private float TurnSpeed;
+    [SerializeField] private float TurnSpeed;
     
     private Controls controls;
+    private CharacterController controller;
+
     private Vector2 direction;
+    private Vector2 turn;
+    private Vector3 TurnDirection;
     private Vector3 PlayerDirection;
+    private Vector3 DirectionToMove;
 
     private Vector2 AimDirection;
-
-    private Rigidbody Myrb;
-
-    /*private Vector3 playerdirection;
-    private Vector3 relativdirection;
-
-    private Vector3 LookForward;
-    private Quaternion PlayerRotation;*/
 
 
     private void OnEnable()
@@ -35,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         controls.Player.Aim.performed += OnAimPerformed;
 
-        Myrb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
     }
 
     // Start is called before the first frame update
@@ -48,22 +46,14 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         PlayerDirection = new Vector3(direction.x, 0, direction.y);
+        DirectionToMove = new Vector3(PlayerDirection.x, Gravity, PlayerDirection.z);
 
-        if(Myrb.velocity.sqrMagnitude < MaxSpeed)
-        {
-            Myrb.AddForce(PlayerDirection * Speed);
-        }
+        TurnDirection = new Vector3(0, turn.y, 0);
+        gameObject.transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
 
-        /*relativdirection = Camera.main.transform.TransformDirection(playerdirection);
-        relativdirection.y = 0;
-        relativdirection.Normalize();
+        DirectionToMove = transform.TransformDirection(DirectionToMove);
 
-        LookForward = Vector3.RotateTowards(this.transform.forward, relativdirection, TurnSpeed * Time.fixedDeltaTime, 0);
-        PlayerRotation = Quaternion.LookRotation(LookForward);
-
-        Myrb.MovePosition(Myrb.position + relativdirection * Speed);
-        Myrb.MoveRotation(PlayerRotation);*/
-
+        controller.Move(DirectionToMove * Speed * Time.deltaTime);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -79,6 +69,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnAimPerformed(InputAction.CallbackContext obj)
     {
-        AimDirection = obj.ReadValue<Vector2>();
+        turn = obj.ReadValue<Vector2>();
+        Debug.Log(turn);
     }
+
 }
