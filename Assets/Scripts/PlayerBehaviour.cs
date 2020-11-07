@@ -6,19 +6,27 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private float Speed;
-    [SerializeField] private float MaxSpeed;
     [SerializeField] private float Gravity;
-    [SerializeField] Transform Camera;
     [SerializeField] private float TurnSpeed;
-    
+    [SerializeField] private float JumpForce;
+
+    [SerializeField] Transform GroundCheck;
+    [SerializeField] LayerMask GroundMask;
+
     private Controls controls;
     private CharacterController controller;
 
     private Vector2 direction;
     private Vector2 turn;
+    private bool buttonactive;
+
     private Vector3 TurnDirection;
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
+    private Vector3 Velocity;
+
+    private float GroundDistance;
+    private bool IsGrounded;
 
     /*private float TurnSmoothTime;
     private float TurnSmoothVelocity;*/
@@ -35,7 +43,12 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Aim.performed += OnAimPerformed;
         controls.Player.Aim.canceled += OnAimPerformed;
 
+        controls.Player.Jump.performed += OnJumpPerformed;
+        controls.Player.Jump.canceled += OnJumpCanceled;
+
         controller = GetComponent<CharacterController>();
+
+        GroundDistance = 0.4f;
 
         //TurnSmoothTime = 0f;
     }
@@ -50,12 +63,25 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         PlayerDirection = new Vector3(direction.x, 0, direction.y);
-        DirectionToMove = new Vector3(PlayerDirection.x, Gravity, PlayerDirection.z);
+        DirectionToMove = new Vector3(PlayerDirection.x, Velocity.y, PlayerDirection.z);
         TurnDirection = new Vector3(0, turn.x, 0);
 
         transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
         DirectionToMove = transform.TransformDirection(DirectionToMove);
         controller.Move(DirectionToMove * Speed * Time.deltaTime);
+
+        Velocity.y += Gravity * Time.deltaTime;
+
+        IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
+
+        if(IsGrounded && Velocity.y < 0 && buttonactive)
+        {
+            Velocity.y = JumpForce;
+        }
+        else
+        {
+            Velocity.y = Gravity;
+        }
 
         //Brackeys mode -> doesn't work meh
         /*DirectionToMove = transform.TransformDirection(DirectionToMove); //Necessaire
@@ -82,12 +108,23 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnAimPerformed(InputAction.CallbackContext obj)
     {
         turn = obj.ReadValue<Vector2>();
-        Debug.Log(turn);
+        //Debug.Log(turn);
     }
 
     private void OnAimCanceled(InputAction.CallbackContext obj)
     {
         turn = Vector2.zero;
+    }
+
+    public void OnJumpPerformed(InputAction.CallbackContext obj)
+    {
+        buttonactive = obj.ReadValueAsButton();
+        Debug.Log("Yes !");
+    }
+
+    private void OnJumpCanceled(InputAction.CallbackContext obj)
+    {
+        buttonactive = false;
     }
 
 }
