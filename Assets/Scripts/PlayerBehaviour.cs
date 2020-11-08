@@ -60,7 +60,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         PlayerDirection = new Vector3(direction.x, 0, direction.y);
         DirectionToMove = new Vector3(PlayerDirection.x, Velocity.y, PlayerDirection.z);
@@ -74,7 +74,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
 
-        if(IsGrounded && Velocity.y < 0 && buttonactive)
+        if(IsGrounded && buttonactive)
         {
             Velocity.y = JumpForce;
         }
