@@ -977,7 +977,7 @@ MonoBehaviour:
   Speed: 5
   Gravity: -2
   TurnSpeed: 100
-  JumpForce: 40
+  JumpForce: 70
   GroundCheck: {fileID: 800685559}
   GroundMask:
     serializedVersion: 2
