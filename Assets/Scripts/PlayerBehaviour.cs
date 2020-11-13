@@ -15,7 +15,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] Transform GroundCheck;
     [SerializeField] LayerMask GroundMask;
 
-    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private HealthBar healthBarAffiche;
+    [SerializeField] private HealthBar healhBarPlayer;
     [SerializeField] private int MaxHealth;
     [SerializeField] private int currentHealth;
 
@@ -52,7 +53,8 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         currentHealth = MaxHealth;
-        healthBar.SetMaxHealth(MaxHealth);
+        healthBarAffiche.SetMaxHealth(MaxHealth);
+        healhBarPlayer.SetMaxHealth(MaxHealth);
     }
 
     // Update is called once per frame
@@ -123,6 +125,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetHeatlh(currentHealth);
+        healthBarAffiche.SetHeatlh(currentHealth);
+        healhBarPlayer.SetHeatlh(currentHealth);
     }
 }
