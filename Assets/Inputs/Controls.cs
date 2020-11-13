@@ -157,11 +157,11 @@ public class @Controls : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""P2"",
+            ""name"": ""Player2"",
             ""id"": ""28948f32-c1c2-4d1a-8e40-664045679d43"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""Move2"",
                     ""type"": ""Value"",
                     ""id"": ""a0136a9c-0cd8-4da9-85d4-f220b903623d"",
                     ""expectedControlType"": ""Vector2"",
@@ -185,7 +185,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Move2"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -196,7 +196,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Move2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -207,7 +207,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Move2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -218,7 +218,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Move2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -229,7 +229,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Move2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -254,10 +254,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        // P2
-        m_P2 = asset.FindActionMap("P2", throwIfNotFound: true);
-        m_P2_Move = m_P2.FindAction("Move", throwIfNotFound: true);
-        m_P2_Aim2 = m_P2.FindAction("Aim2", throwIfNotFound: true);
+        // Player2
+        m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
+        m_Player2_Move2 = m_Player2.FindAction("Move2", throwIfNotFound: true);
+        m_Player2_Aim2 = m_Player2.FindAction("Aim2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -353,55 +353,55 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // P2
-    private readonly InputActionMap m_P2;
-    private IP2Actions m_P2ActionsCallbackInterface;
-    private readonly InputAction m_P2_Move;
-    private readonly InputAction m_P2_Aim2;
-    public struct P2Actions
+    // Player2
+    private readonly InputActionMap m_Player2;
+    private IPlayer2Actions m_Player2ActionsCallbackInterface;
+    private readonly InputAction m_Player2_Move2;
+    private readonly InputAction m_Player2_Aim2;
+    public struct Player2Actions
     {
         private @Controls m_Wrapper;
-        public P2Actions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_P2_Move;
-        public InputAction @Aim2 => m_Wrapper.m_P2_Aim2;
-        public InputActionMap Get() { return m_Wrapper.m_P2; }
+        public Player2Actions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move2 => m_Wrapper.m_Player2_Move2;
+        public InputAction @Aim2 => m_Wrapper.m_Player2_Aim2;
+        public InputActionMap Get() { return m_Wrapper.m_Player2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(P2Actions set) { return set.Get(); }
-        public void SetCallbacks(IP2Actions instance)
+        public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer2Actions instance)
         {
-            if (m_Wrapper.m_P2ActionsCallbackInterface != null)
+            if (m_Wrapper.m_Player2ActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
-                @Aim2.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnAim2;
-                @Aim2.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnAim2;
-                @Aim2.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnAim2;
+                @Move2.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove2;
+                @Move2.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove2;
+                @Move2.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove2;
+                @Aim2.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnAim2;
+                @Aim2.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnAim2;
+                @Aim2.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnAim2;
             }
-            m_Wrapper.m_P2ActionsCallbackInterface = instance;
+            m_Wrapper.m_Player2ActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
+                @Move2.started += instance.OnMove2;
+                @Move2.performed += instance.OnMove2;
+                @Move2.canceled += instance.OnMove2;
                 @Aim2.started += instance.OnAim2;
                 @Aim2.performed += instance.OnAim2;
                 @Aim2.canceled += instance.OnAim2;
             }
         }
     }
-    public P2Actions @P2 => new P2Actions(this);
+    public Player2Actions @Player2 => new Player2Actions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
     }
-    public interface IP2Actions
+    public interface IPlayer2Actions
     {
-        void OnMove(InputAction.CallbackContext context);
+        void OnMove2(InputAction.CallbackContext context);
         void OnAim2(InputAction.CallbackContext context);
     }
 }

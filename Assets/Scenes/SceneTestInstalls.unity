@@ -975,8 +975,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  Gravity: -2
-  TurnSpeed: 100
+  Gravity: -9.81
+  TurnSpeed: 200
   JumpForce: 70
   GroundCheck: {fileID: 800685559}
   GroundMask:

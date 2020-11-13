@@ -10,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float TurnSpeed;
     [SerializeField] private float JumpForce;
 
+    [SerializeField] private Camera PlayerCamera;
+
     [SerializeField] Transform GroundCheck;
     [SerializeField] LayerMask GroundMask;
 
@@ -33,9 +35,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         controls.Player.Move.performed += OnMovePerformed;
         controls.Player.Move.canceled += OnMoveCanceled;
-
-        /*controls.Player.Aim.performed += OnAimPerformed;
-        controls.Player.Aim.canceled += OnAimCanceled;*/
 
         controls.Player.Jump.performed += OnJumpPerformed;
         controls.Player.Jump.canceled += OnJumpCanceled;
@@ -91,7 +90,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         var rotation = Quaternion.LookRotation(PlayerDirection);
-        rotation *= Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
+        rotation *= Quaternion.Euler(0, PlayerCamera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, TurnSpeed * Time.deltaTime);
 
         var MoveDirection = rotation * Vector3.forward; //il va se déplacer tout droit mais orienté selon la rotation
