@@ -17,20 +17,13 @@ public class PlayerBehaviour : MonoBehaviour
     private CharacterController controller;
 
     private Vector2 direction;
-    //private Vector2 turn;
     private bool isjumping;
-    //private bool buttonactive;
 
-    //private Vector3 TurnDirection;
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
-    //private Vector3 Velocity;
 
     private float GroundDistance;
     private bool IsGrounded;
-
-    /*private float TurnSmoothTime;
-    private float TurnSmoothVelocity;*/
 
 
     private void OnEnable()
@@ -49,9 +42,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
 
-        //GroundDistance = 0.4f;
-
-        //TurnSmoothTime = 0f;
+        GroundDistance = 0.4f;
     }
 
     // Start is called before the first frame update
@@ -66,42 +57,13 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
 
-        /*DirectionToMove = new Vector3(PlayerDirection.x, Velocity.y, PlayerDirection.z);
-        TurnDirection = new Vector3(0, turn.x, 0);
-
-        transform.Rotate(TurnDirection * TurnSpeed * Time.deltaTime);
-        DirectionToMove = transform.TransformDirection(DirectionToMove);
-        controller.Move(DirectionToMove * Speed * Time.deltaTime);
-
-        Velocity.y += Gravity * Time.deltaTime;
-
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
-
-        if(IsGrounded && buttonactive //isjumping)
-        {
-            Velocity.y = JumpForce;
-        }
-        else
-        {
-            Velocity.y = Gravity;
-        }*/
-
-        //Brackeys mode -> doesn't work
-        /*DirectionToMove = transform.TransformDirection(DirectionToMove); //Necessaire
-
-        float TargetAngle = Mathf.Atan2(PlayerDirection.x, PlayerDirection.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
-        float Angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref TurnSmoothVelocity, TurnSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, Angle, 0f);
-
-        Vector3 MoveDirection = Quaternion.Euler(0f, TargetAngle, 0f) * (DirectionToMove);
-        controller.Move(MoveDirection * Speed * Time.deltaTime);*/
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
     {
         direction = obj.ReadValue<Vector2>();
         PlayerDirection = new Vector3(direction.x, 0, direction.y); //placer cette ligne dans la fonction a la place de l'Update est plus opti
-        //Debug.Log(direction);
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext obj)
@@ -110,27 +72,14 @@ public class PlayerBehaviour : MonoBehaviour
         PlayerDirection = Vector3.zero;
     }
 
-    /*private void OnAimPerformed(InputAction.CallbackContext obj)
-    {
-        turn = obj.ReadValue<Vector2>();
-        //Debug.Log(turn);
-    }
-
-    private void OnAimCanceled(InputAction.CallbackContext obj)
-    {
-        turn = Vector2.zero;
-    }*/
-
     public void OnJumpPerformed(InputAction.CallbackContext obj)
     {
-        //buttonactive = obj.ReadValueAsButton();
         isjumping = true;
         Debug.Log("Yes !");
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)
     {
-        //buttonactive = false;
         isjumping = false;
     }
 
