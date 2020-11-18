@@ -32,6 +32,13 @@ public class PlayerBehaviour : MonoBehaviour
     private float GroundDistance;
     private bool IsGrounded;
 
+    private RaycastHit Camhit; //RaycastHit pour avoir des informations sur l'objet hit par le raycast
+    private Ray Camraycast;
+    [SerializeField] private float MaxDistanceToPick;
+
+    private int FoodLayerMask;
+    private int FruitLayerMask;
+
 
     private void OnEnable()
     {
@@ -55,6 +62,8 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth = MaxHealth;
         healthBarAffiche.SetMaxHealth(MaxHealth);
         healhBarPlayer.SetMaxHealth(MaxHealth);
+
+        FoodLayerMask = 1 << 11; //il faut indiquer le numéro de tous les LayerMask à ignorer
     }
 
     // Update is called once per frame
@@ -64,6 +73,13 @@ public class PlayerBehaviour : MonoBehaviour
         controller.Move(DirectionToMove * Time.deltaTime);
 
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask); //raycast
+
+        Camraycast = PlayerCamera.ScreenPointToRay(PlayerDirection);
+
+        if(Physics.Raycast(Camraycast, MaxDistanceToPick, FoodLayerMask)) //le raycast qu'on utilise, la distance max de l'objet rencontré, le numéro du LayerMaskdes objets à ignorer
+        {
+            Debug.Log("wut"); //pour le moment ça fonctionne, quand la cam regarde le sol; la console ecrit wut et si on regarde le ciel elle n'ecrit rien
+        }
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
