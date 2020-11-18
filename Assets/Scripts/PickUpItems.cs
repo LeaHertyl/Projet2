@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PickUpItems : Interactable
 {
+    [SerializeField] private Items item;
+
     public override void Interact()
     {
         base.Interact();
@@ -13,8 +15,8 @@ public class PickUpItems : Interactable
 
     private void PickUp()
     {
-        Debug.Log("pickup");
-        //Place l'objet dans l'inventaire
+        Debug.Log("pickup" + item.name);
+        FindObjectOfType<Inventory>().Add(item);
         Destroy(gameObject);
     }
 }
