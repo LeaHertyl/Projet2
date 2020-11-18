@@ -8,11 +8,15 @@ public class Inventory : MonoBehaviour
 
     private int SlotsNumber;
 
+    //il faut que je me renseigne sur les delegate, j'ai pas tout compris -> ca fait en sorte que quand la methode est appelee, elle execute tous les evenements qui lui sont associes ?
+    private delegate void OnItemChanged(); 
+    private OnItemChanged onItemChangedCallback;
+
     // Start is called before the first frame update
     void Start()
     {
         itemList = new List<Items>();
-        SlotsNumber = 2;
+        SlotsNumber = 7;
     }
 
     // Update is called once per frame
@@ -28,10 +32,13 @@ public class Inventory : MonoBehaviour
             Debug.Log("not enough space");
             return false;
         }
-        else
+
+        itemList.Add(item);
+        return true;
+
+        if(onItemChangedCallback != null)
         {
-            itemList.Add(item);
-            return true;
+            onItemChangedCallback.Invoke();
         }
     }
 
