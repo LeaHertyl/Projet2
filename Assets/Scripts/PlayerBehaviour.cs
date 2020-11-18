@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
+    private Vector3 MoveDirection;
 
     private float GroundDistance;
     private bool IsGrounded;
@@ -36,8 +37,10 @@ public class PlayerBehaviour : MonoBehaviour
     private Ray Camraycast;
     [SerializeField] private float MaxDistanceToPick;
 
-    private int FoodLayerMask;
-    private int FruitLayerMask;
+    [SerializeField] private LayerMask FoodLayerMask;
+    [SerializeField] private LayerMask FruitLayerMask;
+
+    [SerializeField] private GameObject Head;
 
 
     private void OnEnable()
@@ -62,8 +65,6 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth = MaxHealth;
         healthBarAffiche.SetMaxHealth(MaxHealth);
         healhBarPlayer.SetMaxHealth(MaxHealth);
-
-        FoodLayerMask = 1 << 11; //il faut indiquer le numéro de tous les LayerMask à ignorer
     }
 
     // Update is called once per frame
@@ -74,11 +75,17 @@ public class PlayerBehaviour : MonoBehaviour
 
         IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask); //raycast
 
-        Camraycast = PlayerCamera.ScreenPointToRay(PlayerDirection);
+        Debug.DrawRay(PlayerCamera.transform.position, transform.TransformDirection(Vector3.forward) * MaxDistanceToPick, Color.red); //permet d'afficher le rayon
 
-        if(Physics.Raycast(Camraycast, MaxDistanceToPick, FoodLayerMask)) //le raycast qu'on utilise, la distance max de l'objet rencontré, le numéro du LayerMaskdes objets à ignorer
+        //l'origine du raycast,sa direction, les informations sur l'objet collide, la distance max de l'objet collide, le Layer sur lequel sont les objets qu'on veut collider
+        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask)) 
         {
-            Debug.Log("wut"); //pour le moment ça fonctionne, quand la cam regarde le sol; la console ecrit wut et si on regarde le ciel elle n'ecrit rien
+            Debug.Log("wut"); 
+        }
+
+        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask))
+        {
+            Debug.Log("ah");
         }
     }
 
@@ -110,15 +117,20 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(PlayerDirection == Vector3.zero)
         {
-            return Vector3.zero;
+            var rotation2 = Quaternion.LookRotation(PlayerDirection);
+            rotation2 *= Quaternion.Euler(0, PlayerCamera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation2, TurnSpeed * Time.deltaTime);
+
+            MoveDirection = rotation2 * Vector3.zero;
+            return MoveDirection.normalized;
         }
 
         var rotation = Quaternion.LookRotation(PlayerDirection);
         rotation *= Quaternion.Euler(0, PlayerCamera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, TurnSpeed * Time.deltaTime);
 
-        var MoveDirection = rotation * Vector3.forward; //il va se déplacer tout droit mais orienté selon la rotation
-        return MoveDirection.normalized * Speed; //faudrait faire une variable sérialisée pour changer la vitesse du perso
+        MoveDirection = rotation * Vector3.forward; //il va se déplacer tout droit mais orienté selon la rotation
+        return MoveDirection.normalized * Speed;
     }
 
     private Vector3 ApplyGravity()
