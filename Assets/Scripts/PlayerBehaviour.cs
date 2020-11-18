@@ -81,11 +81,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask)) 
         {
             Debug.Log("wut"); 
+            //Affichage de quel bouton on doit enclencher pour ramasser l'objet
+            //si on clique dessus : l'objet disparait et va dans l'inventaire du joueur
         }
 
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask))
         {
             Debug.Log("ah");
+            //Affichage de quel bouton on doit enclencher pour ramasser l'objet
+            //si on clique dessus : l'objet disparait et la vie du joueur remonte
         }
     }
 
