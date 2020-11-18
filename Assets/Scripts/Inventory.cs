@@ -8,15 +8,28 @@ public class Inventory : MonoBehaviour
 
     private int SlotsNumber;
 
-    //il faut que je me renseigne sur les delegate, j'ai pas tout compris -> ca fait en sorte que quand la methode est appelee, elle execute tous les evenements qui lui sont associes ?
-    private delegate void OnItemChanged(); 
-    private OnItemChanged onItemChangedCallback;
+    public static Inventory instance;
+
+    //il faut que je me renseigne sur les delegate, j'ai pas tout compris -> ca fait en sorte que quand la methode est appelee, elle execute tous les evenements qui lui sont associes ? contient des fonctions au lieu de data ?
+    public delegate void OnItemChanged(); 
+    public OnItemChanged onItemChangedCallback; //on appelle/trigger cet evenement des qu'un element est ajoute ou supprime dans la liste
 
     // Start is called before the first frame update
     void Start()
     {
         itemList = new List<Items>();
         SlotsNumber = 7;
+    }
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Debug.LogWarning("More than one instance founded !");
+            return;
+        }
+
+        instance = this;
     }
 
     // Update is called once per frame
@@ -34,16 +47,24 @@ public class Inventory : MonoBehaviour
         }
 
         itemList.Add(item);
-        return true;
+        Debug.Log("yo"); //ca fonctionne
 
         if(onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();
+            Debug.Log("ici ?"); //c'est ici que ca ne fonctionne pas -> on ne rentre jamais dans le if
         }
+
+        return true;
     }
 
     public void Remove(Items item)
     {
         itemList.Remove(item);
+
+        if(onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
     }
 }

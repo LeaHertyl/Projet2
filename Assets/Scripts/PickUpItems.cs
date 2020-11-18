@@ -18,7 +18,7 @@ public class PickUpItems : Interactable
     private void PickUp()
     {
         Debug.Log("pickup" + item.name);
-        WasPickedUp = FindObjectOfType<Inventory>().Add(item); //dans la vidéo 04 Brackeys utilise des Singleton mais j'ai pas compris alors j'utilise la methode la moins fiable pour le moment
+        WasPickedUp = Inventory.instance.Add(item); //dans la vidéo 04 Brackeys utilise des Singleton mais j'ai pas compris alors j'utilise la methode la moins fiable pour le moment -> en fait je l'ai fait meme si j'ai bof compris
 
         if(WasPickedUp)
         {
