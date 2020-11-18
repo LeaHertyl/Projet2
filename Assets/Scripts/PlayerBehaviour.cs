@@ -80,9 +80,12 @@ public class PlayerBehaviour : MonoBehaviour
         //l'origine du raycast,sa direction, les informations sur l'objet collide, la distance max de l'objet collide, le Layer sur lequel sont les objets qu'on veut collider
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask)) 
         {
-            Debug.Log("wut"); 
-            //Affichage de quel bouton on doit enclencher pour ramasser l'objet
-            //si on clique dessus : l'objet disparait et va dans l'inventaire du joueur
+            Interactable interactable = Camhit.collider.GetComponent<Interactable>();
+
+            if(interactable != null)
+            {
+                Debug.Log("wut");
+            }
         }
 
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask))
