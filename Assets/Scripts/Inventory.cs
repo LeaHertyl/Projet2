@@ -6,10 +6,13 @@ public class Inventory : MonoBehaviour
 {
     public List<Items> itemList;
 
+    private int SlotsNumber;
+
     // Start is called before the first frame update
     void Start()
     {
         itemList = new List<Items>();
+        SlotsNumber = 2;
     }
 
     // Update is called once per frame
@@ -18,9 +21,18 @@ public class Inventory : MonoBehaviour
         
     }
 
-    public void Add(Items item)
+    public bool Add(Items item)
     {
-        itemList.Add(item);
+        if(itemList.Count >= SlotsNumber)
+        {
+            Debug.Log("not enough space");
+            return false;
+        }
+        else
+        {
+            itemList.Add(item);
+            return true;
+        }
     }
 
     public void Remove(Items item)

@@ -6,6 +6,8 @@ public class PickUpItems : Interactable
 {
     [SerializeField] private Items item;
 
+    private bool WasPickedUp;
+
     public override void Interact()
     {
         base.Interact();
@@ -16,7 +18,11 @@ public class PickUpItems : Interactable
     private void PickUp()
     {
         Debug.Log("pickup" + item.name);
-        FindObjectOfType<Inventory>().Add(item);
-        Destroy(gameObject);
+        WasPickedUp = FindObjectOfType<Inventory>().Add(item); //dans la vidéo 04 Brackeys utilise des Singleton mais j'ai pas compris alors j'utilise la methode la moins fiable pour le moment
+
+        if(WasPickedUp)
+        {
+            Destroy(gameObject);
+        }
     }
 }
