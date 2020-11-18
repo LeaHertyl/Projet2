@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundControler : MonoBehaviour
 {
+    [SerializeField] private AudioClip AmbientMusic;
     // Start is called before the first frame update
     void Start()
     {
