@@ -5,28 +5,22 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private Slider slider;
+    [SerializeField] Slider slider;
+    [SerializeField] Gradient gradient;
+    [SerializeField] Image fill;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        slider = GetComponent<Slider>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void SetHeatlh(int health)
-    {
-        slider.value = health;
-    }
-
-    private void SetMaxHealth(int health)
+    public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
         slider.value = health;
+
+        fill.color = gradient.Evaluate(1f);
+    }
+
+    public void SetHeatlh(int health)
+    {
+        slider.value = health;
+
+        fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }

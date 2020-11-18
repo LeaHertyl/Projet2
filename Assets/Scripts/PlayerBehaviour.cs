@@ -15,6 +15,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] Transform GroundCheck;
     [SerializeField] LayerMask GroundMask;
 
+    [SerializeField] private HealthBar healthBarAffiche;
+    [SerializeField] private HealthBar healhBarPlayer;
+    [SerializeField] private int MaxHealth;
+    [SerializeField] private int currentHealth;
+
     private Controls controls;
     private CharacterController controller;
 
@@ -47,7 +52,9 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentHealth = MaxHealth;
+        healthBarAffiche.SetMaxHealth(MaxHealth);
+        healhBarPlayer.SetMaxHealth(MaxHealth);
     }
 
     // Update is called once per frame
@@ -56,7 +63,7 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
 
-        IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
+        IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask); //raycast
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -75,6 +82,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isjumping = true;
         Debug.Log("Yes !");
+        TakeDamage(20);
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)
@@ -112,5 +120,12 @@ public class PlayerBehaviour : MonoBehaviour
 
         var ForceJump = new Vector3(0, JumpForce, 0);
         return ForceJump;
+    }
+
+    private void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBarAffiche.SetHeatlh(currentHealth);
+        healhBarPlayer.SetHeatlh(currentHealth);
     }
 }
