@@ -35,8 +35,12 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
+    /// <summary>
+    /// Fonction "globale" qu'on va pouvoir modifier en fonction du type d'interraction qu'on veut avoir avec les differents objets
+    /// </summary>
     public virtual void Interact()
     {
+        //Indique ce qu'il va se passer une fois que le joueur a interragi avec l'objet
         Debug.Log("interact with " + transform.name);
     }
 }

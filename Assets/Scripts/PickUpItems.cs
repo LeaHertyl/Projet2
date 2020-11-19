@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class PickUpItems : Interactable
 {
-    [SerializeField] private Items item;
+    //la classe n'est pas MonoBehaviour -> ca permet d'attribuer a tous les objets qui auront ce script de deriver de la classe Interactable -> d'avoir tous ses paramètres de base
+    //si on ajoute rien a ce code, tous les objets qui ont ce code auront quand meme les parametres defini dans le script Interactable
+    
+    [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
 
     private bool WasPickedUp;
 
+    /// <summary>
+    /// permet de modifier ce qui va se passer quand la fonction virtual void Interact est declenchee
+    /// </summary>
     public override void Interact()
     {
-        base.Interact();
+        base.Interact(); //on va executer ce qui est indique de base dans la fonction, dans le script Interactable
 
+        //en plus des actions de la fonction de base, les objets qui auront ce script exectuteront la fonction PickUp quand le player entrera dans la zone definie par le raduis du gizmos de l'objet a ramasser
         PickUp();
     }
 
-    private void PickUp()
+    public void PickUp()
     {
         Debug.Log("pick up " + item.name);
-        WasPickedUp = Inventory.instance.Add(item); //dans la vidéo 04 Brackeys utilise des Singleton mais j'ai pas compris alors j'utilise la methode la moins fiable pour le moment -> en fait je l'ai fait meme si j'ai bof compris
 
-        if(WasPickedUp)
+        WasPickedUp = Inventory.instance.Add(item);
+
+        if (WasPickedUp)
         {
             Destroy(gameObject);
+            Debug.Log("objet detruit");
         }
     }
 }

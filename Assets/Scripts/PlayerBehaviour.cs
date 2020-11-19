@@ -12,7 +12,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] private Camera PlayerCamera;
 
-    [SerializeField] Transform GroundCheck;
     [SerializeField] LayerMask GroundMask;
 
     [SerializeField] private HealthBar healthBarAffiche;
@@ -31,9 +30,6 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
     private Vector3 MoveDirection;
-
-    private float GroundDistance;
-    private bool IsGrounded;
 
     private RaycastHit Camhit; //RaycastHit pour avoir des informations sur l'objet hit par le raycast
     private Ray Camraycast;
@@ -55,8 +51,6 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Jump.canceled += OnJumpCanceled;
 
         controller = GetComponent<CharacterController>();
-
-        GroundDistance = 0.4f;
     }
 
     // Start is called before the first frame update
@@ -78,6 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
         var Foodraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask);
         var Fruitraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask);
 
+        /*
         //l'origine du raycast,sa direction, les informations sur l'objet collide, la distance max de l'objet collide, le Layer sur lequel sont les objets qu'on veut collider
         if (Foodraycast) 
         {
@@ -99,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
             //Affichage de quel bouton on doit enclencher pour ramasser l'objet
             //si on clique dessus : l'objet disparait et la vie du joueur remonte
-        }
+        }*/
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)

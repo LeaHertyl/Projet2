@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    private Inventory inventory;
+    private Inventory inventoryref;
 
     // Start is called before the first frame update
     void Start()
     {
-        inventory = Inventory.instance;
-        inventory.onItemChangedCallback += UpdateUI; //on ajoute la fonction UpdateUI aux evenements qui doivent etre joues quand on ajoute/supprime un element dans la liste
-        //ca ne fonctionne pas
+        inventoryref = Inventory.instance; //on appelle l'instance faite avec l'inventaire
+        inventoryref.onItemChangedCallback += UpdateUI; //on veut ajouter UpdateUI a la liste de methodes a effectuer quand l'evenement onItemChangedCallback est appele
     }
 
     // Update is called once per frame
