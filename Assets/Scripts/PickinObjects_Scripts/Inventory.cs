@@ -42,7 +42,13 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         itemList = new List<Items>();
-        SlotsNumber = 2;
+        SlotsNumber = 7;
+
+        //pour moi c'est ici qu'il faut venir chercher l'objet qui contient le script, puis son composant script, puis attribuer son booleen a une variable propre a ce script
+        //mais ca ne fonctionne pas, quand je fais ca et que je Debug la valeur du booleen sous le 1er if ca fonctionne, des que je met item.isFood && booleen = true ca ne rentre plus dans la boucle
+        //est-ce que c'est parce que, une fois que je suis dans le perimetre du radius c'est trop tard ?
+        //en vrai peut etre parce que du coup la virtual fonction Interact s'est déjà appliquee
+        //est-ce que j'ai vraiment besoin de devoir appuyer sur un bouton pour ramasser la bouffe ? (oui allez arrete c'est quand meme mieux)
     }
 
     // Update is called once per frame
