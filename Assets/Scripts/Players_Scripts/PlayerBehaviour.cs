@@ -27,16 +27,19 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 direction;
     private bool isjumping;
 
+    public bool isPicking;
+
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
     private Vector3 MoveDirection;
 
+    /*
     private RaycastHit Camhit; //RaycastHit pour avoir des informations sur l'objet hit par le raycast
     private Ray Camraycast;
     [SerializeField] private float MaxDistanceToPick;
 
     [SerializeField] private LayerMask FoodLayerMask;
-    [SerializeField] private LayerMask FruitLayerMask;
+    [SerializeField] private LayerMask FruitLayerMask;*/
 
 
     private void OnEnable()
@@ -49,6 +52,10 @@ public class PlayerBehaviour : MonoBehaviour
 
         controls.Player.Jump.performed += OnJumpPerformed;
         controls.Player.Jump.canceled += OnJumpCanceled;
+
+        controls.Player.Pick.performed += OnPickPerformed;
+        /*
+        controls.Player.Pick.canceled += OnPickCanceled;*/
 
         controller = GetComponent<CharacterController>();
     }
@@ -67,12 +74,13 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
 
+        /*
         Debug.DrawRay(PlayerCamera.transform.position, transform.TransformDirection(Vector3.forward) * MaxDistanceToPick, Color.red); //permet d'afficher le rayon
 
         var Foodraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask);
         var Fruitraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask);
 
-        /*
+        
         //l'origine du raycast,sa direction, les informations sur l'objet collide, la distance max de l'objet collide, le Layer sur lequel sont les objets qu'on veut collider
         if (Foodraycast) 
         {
@@ -120,6 +128,18 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isjumping = false;
     }
+
+    public void OnPickPerformed(InputAction.CallbackContext obj)
+    {
+        isPicking = true;
+        Debug.Log("is picking input activated");
+    }
+
+    /*
+    public void OnPickCanceled(InputAction.CallbackContext obj)
+    {
+        isPicking = false;
+    }*/
 
     private Vector3 ApplyMove()
     {

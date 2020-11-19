@@ -10,6 +10,8 @@ public class Interactable : MonoBehaviour
     private float distance;
     private bool hasInteracted;
 
+    private bool PickingBool;
+    private bool TruePick;
 
     // Start is called before the first frame update
     void Start()

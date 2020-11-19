@@ -8,6 +8,9 @@ public class Inventory : MonoBehaviour
 
     private int SlotsNumber;
 
+    private bool PickingBool;
+
+
     #region Singleton
     //Singleton : créer une instance à partir d'une variable statique (une variable partagee par toutes les instances de la classe)
     //cree une reference globale au projet a l'inventaire

@@ -465,7 +465,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158258335}
-  m_LocalRotation: {x: -0.023431418, y: 0.9742745, z: -0.18868512, w: -0.120988}
+  m_LocalRotation: {x: -0.023431404, y: 0.9742745, z: -0.18868509, w: -0.12098795}
   m_LocalPosition: {x: -5.183952, y: 2.76, z: -12.131497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2636,7 +2636,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286952523}
-  m_LocalRotation: {x: -0.023431418, y: 0.9742745, z: -0.18868512, w: -0.120988}
+  m_LocalRotation: {x: -0.023431404, y: 0.9742745, z: -0.18868509, w: -0.12098795}
   m_LocalPosition: {x: -5.183952, y: 2.76, z: -12.131497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4190,7 +4190,7 @@ GameObject:
   - component: {fileID: 2091164723}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4256,13 +4256,7 @@ MonoBehaviour:
   MaxHealth: 100
   currentHealth: 0
   PlayerFeet: {fileID: 1630398008}
-  MaxDistanceToPick: 100
-  FoodLayerMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  FruitLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
+  isPicking: 0
 --- !u!114 &2109232444 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6106182416238439515, guid: 404d878f4c1aa384a9ab57b3131786f5,
