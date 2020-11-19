@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: truc
   m_EditorClassIdentifier: 
   name: truc
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f6a8600e433b791469b9a3d436be9a51, type: 3}
+  isFood: 1

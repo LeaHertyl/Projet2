@@ -14,6 +14,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/HealthBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Assets/loadingBar/scripts/rotatetotate.cs" />
       </list>
     </option>
   </component>
@@ -60,6 +61,7 @@
       <workItem from="1605198868215" duration="645000" />
       <workItem from="1605280611043" duration="1000" />
       <workItem from="1605706028983" duration="1000" />
+      <workItem from="1605795964772" duration="62000" />
     </task>
     <servers />
   </component>

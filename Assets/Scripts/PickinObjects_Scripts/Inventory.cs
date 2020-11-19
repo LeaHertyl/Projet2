@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         itemList = new List<Items>();
-        SlotsNumber = 7;
+        SlotsNumber = 2;
     }
 
     // Update is called once per frame

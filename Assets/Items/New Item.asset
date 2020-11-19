@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: New Item
   m_EditorClassIdentifier: 
   name: Machin
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3d14fbcd165b68348801c2694dff4fb5, type: 3}
   isFood: 1

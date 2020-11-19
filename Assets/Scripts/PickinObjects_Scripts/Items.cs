@@ -18,4 +18,15 @@ public class Items : ScriptableObject
     public Sprite icon = null;
     public bool isFood = true;
 
+    //virtual parce qu'on veut peut etre qu'il ne se passe pas la meme chose quand on utilise des objets differents
+    public virtual void Use()
+    {
+        //Use the item
+        //Something happen -> lancer l'item
+
+        //pour le moment on ne peut meme pas debug la fonction parce que je ne sais pas comment utiliser l'item -> Brackeys fait un evenement OnClick sur le boutton de l'inventaire
+        //j'aimerais simplement utiliser le premier item de la liste
+        Debug.Log("using " + name); 
+    }
+
 }
