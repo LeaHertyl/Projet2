@@ -20,6 +20,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private int MaxHealth;
     [SerializeField] private int currentHealth;
 
+    [SerializeField] private Transform PlayerFeet;
+
     private Controls controls;
     private CharacterController controller;
 
@@ -39,8 +41,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] private LayerMask FoodLayerMask;
     [SerializeField] private LayerMask FruitLayerMask;
-
-    [SerializeField] private GameObject Head;
 
 
     private void OnEnable()
@@ -73,12 +73,13 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
 
-        IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask); //raycast
-
         Debug.DrawRay(PlayerCamera.transform.position, transform.TransformDirection(Vector3.forward) * MaxDistanceToPick, Color.red); //permet d'afficher le rayon
 
+        var Foodraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask);
+        var Fruitraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask);
+
         //l'origine du raycast,sa direction, les informations sur l'objet collide, la distance max de l'objet collide, le Layer sur lequel sont les objets qu'on veut collider
-        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask)) 
+        if (Foodraycast) 
         {
             Interactable interactable = Camhit.collider.GetComponent<Interactable>();
 
@@ -88,9 +89,14 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask))
+        if (Fruitraycast)
         {
-            Debug.Log("ah");
+            Interactable interactable = Camhit.collider.GetComponent<Interactable>();
+
+            if(interactable != null)
+            {
+                Debug.Log("ah");
+            }
             //Affichage de quel bouton on doit enclencher pour ramasser l'objet
             //si on clique dessus : l'objet disparait et la vie du joueur remonte
         }
@@ -142,19 +148,36 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Vector3 ApplyGravity()
     {
-        var DirectionToFall = new Vector3(0, Gravity, 0);
+        var startRaycastPos = PlayerFeet.position;
+        var Groundraycast = Physics.Raycast(startRaycastPos, Vector3.down, 0.1f, GroundMask); //point de depart, direction, taille (0.1f = 10cm), masque
+
+        var DirectionToFall = Vector3.zero;
+
+        if (Groundraycast)
+        {
+            DirectionToMove.y = 0;
+        }
+        else
+        {
+            //on met time.deltatime ici en + de l'update parce qu'on veut par rapport au temps ecoule au carre (cette valeur doit etre mutliplie par elle meme pour appliquer la gravite)
+            DirectionToFall = new Vector3(0, DirectionToMove.y + Gravity * Time.deltaTime, 0); 
+        }
+
         return DirectionToFall;
     }
 
     private Vector3 ApplyJump()
     {
-        if(isjumping == false)
+        if (!isjumping || DirectionToMove.y != 0) //on verifie si on est déjà en train de sauter ou si on est train de tomber
         {
             return Vector3.zero;
         }
 
-        var ForceJump = new Vector3(0, JumpForce, 0);
-        return ForceJump;
+        //vitesse = racine carre de (hauteur souhaitee x -2 x gravite)
+        //la fonction Mathf.Sqrt() calcul pour nous la racine carree
+        var heightSpeed = Mathf.Sqrt(JumpForce * -2 * Gravity);
+        var JumpVector = new Vector3(0, heightSpeed, 0);
+        return JumpVector;
     }
 
     private void TakeDamage(int damage)

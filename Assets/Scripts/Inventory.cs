@@ -8,7 +8,20 @@ public class Inventory : MonoBehaviour
 
     private int SlotsNumber;
 
+    #region Singleton
     public static Inventory instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance founded !");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion 
 
     //il faut que je me renseigne sur les delegate, j'ai pas tout compris -> ca fait en sorte que quand la methode est appelee, elle execute tous les evenements qui lui sont associes ? contient des fonctions au lieu de data ?
     public delegate void OnItemChanged(); 
@@ -19,17 +32,6 @@ public class Inventory : MonoBehaviour
     {
         itemList = new List<Items>();
         SlotsNumber = 7;
-    }
-
-    private void Awake()
-    {
-        if(instance != null)
-        {
-            Debug.LogWarning("More than one instance founded !");
-            return;
-        }
-
-        instance = this;
     }
 
     // Update is called once per frame
@@ -48,6 +50,8 @@ public class Inventory : MonoBehaviour
 
         itemList.Add(item);
         Debug.Log("yo"); //ca fonctionne
+
+        if(itemList != null)
 
         if(onItemChangedCallback != null)
         {

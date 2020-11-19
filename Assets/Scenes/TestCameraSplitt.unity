@@ -465,7 +465,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158258335}
-  m_LocalRotation: {x: -0.023431404, y: 0.9742745, z: -0.18868509, w: -0.12098795}
+  m_LocalRotation: {x: -0.023431411, y: 0.9742745, z: -0.18868509, w: -0.120987974}
   m_LocalPosition: {x: -5.183952, y: 2.76, z: -12.131497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2565,7 +2565,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286952523}
-  m_LocalRotation: {x: -0.023431404, y: 0.9742745, z: -0.18868509, w: -0.12098795}
+  m_LocalRotation: {x: -0.023431411, y: 0.9742745, z: -0.18868509, w: -0.120987974}
   m_LocalPosition: {x: -5.183952, y: 2.76, z: -12.131497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4118,9 +4118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  Gravity: -10
+  Gravity: -40
   TurnSpeed: 300
-  JumpForce: 70
+  JumpForce: 3
   PlayerCamera: {fileID: 279968307}
   GroundCheck: {fileID: 1630398008}
   GroundMask:
@@ -4130,6 +4130,7 @@ MonoBehaviour:
   healhBarPlayer: {fileID: 2109232444}
   MaxHealth: 100
   currentHealth: 0
+  PlayerFeet: {fileID: 1630398008}
   MaxDistanceToPick: 100
   FoodLayerMask:
     serializedVersion: 2
@@ -4137,7 +4138,6 @@ MonoBehaviour:
   FruitLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  Head: {fileID: 0}
 --- !u!114 &2091164724
 MonoBehaviour:
   m_ObjectHideFlags: 0
