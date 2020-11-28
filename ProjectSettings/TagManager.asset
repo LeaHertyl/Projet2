@@ -8,6 +8,8 @@ TagManager:
   - Player1
   - Player2
   - Camera2
+  - InventoryP1
+  - GameManager
   layers:
   - Default
   - TransparentFX

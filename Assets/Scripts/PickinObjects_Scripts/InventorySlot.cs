@@ -31,7 +31,7 @@ public class InventorySlot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        item = null;
+        Destroy(item);
 
         icon.sprite = null;
         icon.enabled = false;

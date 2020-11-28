@@ -8,7 +8,12 @@ public class Inventory : MonoBehaviour
 
     private int SlotsNumber;
 
-    private bool PickingBool;
+    public int nmbObjects;
+
+    private bool IsThrowing;
+
+    /*
+    private int Hillfunction;*/
 
 
     #region Singleton
@@ -49,12 +54,13 @@ public class Inventory : MonoBehaviour
         //est-ce que c'est parce que, une fois que je suis dans le perimetre du radius c'est trop tard ?
         //en vrai peut etre parce que du coup la virtual fonction Interact s'est déjà appliquee
         //est-ce que j'ai vraiment besoin de devoir appuyer sur un bouton pour ramasser la bouffe ? (oui allez arrete c'est quand meme mieux)
+        //en vrai osef je pense
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
      /// <summary>
      /// 
@@ -63,35 +69,53 @@ public class Inventory : MonoBehaviour
      /// <returns></returns>
     public bool Add(Items item)
     {
-        if(item.isFood)
+        var Player1 = GameObject.FindWithTag("Player1");
+        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
+
+        if (item.isFood)
         {
             if (itemList.Count >= SlotsNumber)
             {
                 Debug.Log("not enough space");
                 return false; //retourne false au booleen de la fonction ->
             }
-
-            itemList.Add(item); //on ajoute l'item concerne par cette fonction dans la liste itemList
-            Debug.Log("Objet ajoute a la liste");
-            //avant que je rajoute la suite, tout fonctionne tres bien jusque là
+            else
+            {
+                itemList.Add(item); //on ajoute l'item concerne par cette fonction dans la liste itemList
+                Debug.Log("Objet ajoute a la liste");
+                //avant que je rajoute la suite, tout fonctionne tres bien jusque là
+                nmbObjects += 1;
+                Debug.Log("nombre = " + nmbObjects);
+                Player1Script.InstantiateFirstFood();
+            }
 
             if (onItemChangedCallback != null)
             {
-                onItemChangedCallback.Invoke(); //pour le moment ca n'invoque rien
-                Debug.Log("ici ?"); //c'est ici que ca ne fonctionne pas -> on ne rentre jamais dans le if -> ne detecte pas que l'item a été ajouté a la liste
+                onItemChangedCallback.Invoke();
             }
+        }
+        else if(item.isFruit)
+        {
+            //remonte la vie du joueur si elle est en dessous de 100
         }
 
         return true;
     }
 
-    public void Remove(Items item)
+    public bool Remove(Items item)
     {
-        itemList.Remove(item);
-
-        if(onItemChangedCallback != null)
+        if(item.isThrown)
         {
-            onItemChangedCallback.Invoke();
+            itemList.Remove(item);
+            nmbObjects += 1;
+            Debug.Log("ici");
+
+            if (onItemChangedCallback != null)
+            {
+                onItemChangedCallback.Invoke();
+            }
         }
+
+        return true;
     }
 }

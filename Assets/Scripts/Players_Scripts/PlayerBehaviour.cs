@@ -21,6 +21,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] private Transform PlayerFeet;
 
+    [SerializeField] private GameObject prefabToInstantiate;
+    [SerializeField] private Transform handPosition;
+
     private Controls controls;
     private CharacterController controller;
 
@@ -28,10 +31,14 @@ public class PlayerBehaviour : MonoBehaviour
     private bool isjumping;
 
     public bool isPicking;
+    public bool isThrowing;
 
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
     private Vector3 MoveDirection;
+
+    private int inventoryObjects;
+    //private 
 
     /*
     private RaycastHit Camhit; //RaycastHit pour avoir des informations sur l'objet hit par le raycast
@@ -54,8 +61,10 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Jump.canceled += OnJumpCanceled;
 
         controls.Player.Pick.performed += OnPickPerformed;
-        /*
-        controls.Player.Pick.canceled += OnPickCanceled;*/
+        controls.Player.Pick.canceled += OnPickCanceled;
+
+        controls.Player.Throw.performed += OnThrowPerformed;
+        controls.Player.Throw.canceled += OnThrowCanceled;
 
         controller = GetComponent<CharacterController>();
     }
@@ -66,6 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth = MaxHealth;
         healthBarAffiche.SetMaxHealth(MaxHealth);
         healhBarPlayer.SetMaxHealth(MaxHealth);
+
     }
 
     // Update is called once per frame
@@ -73,6 +83,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
+
 
         /*
         Debug.DrawRay(PlayerCamera.transform.position, transform.TransformDirection(Vector3.forward) * MaxDistanceToPick, Color.red); //permet d'afficher le rayon
@@ -121,7 +132,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isjumping = true;
         Debug.Log("Yes !");
-        TakeDamage(20);
+        //TakeDamage(20);
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)
@@ -135,11 +146,21 @@ public class PlayerBehaviour : MonoBehaviour
         Debug.Log("is picking input activated");
     }
 
-    /*
-    public void OnPickCanceled(InputAction.CallbackContext obj)
+    private void OnPickCanceled(InputAction.CallbackContext obj)
     {
         isPicking = false;
-    }*/
+    }
+
+    public void OnThrowPerformed(InputAction.CallbackContext obj)
+    {
+        isThrowing = true;
+        Debug.Log("is throwing input activated");
+    }
+
+    private void OnThrowCanceled(InputAction.CallbackContext obj)
+    {
+        isThrowing = false;
+    }
 
     private Vector3 ApplyMove()
     {
@@ -195,10 +216,39 @@ public class PlayerBehaviour : MonoBehaviour
         return JumpVector;
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBarAffiche.SetHeatlh(currentHealth);
         healhBarPlayer.SetHeatlh(currentHealth);
+    }
+
+    public void Hill(int hill)
+    {
+        currentHealth += hill;
+        healthBarAffiche.SetHeatlh(currentHealth);
+        healhBarPlayer.SetHeatlh(currentHealth);
+    }
+
+    public void InstantiateFirstFood()
+    {
+        var Inventory = GameObject.FindWithTag("GameManager");
+        var InventoryCount = Inventory.GetComponent<Inventory>();
+        inventoryObjects = InventoryCount.nmbObjects;
+
+        if(inventoryObjects == 1)
+        {
+            Instantiate(prefabToInstantiate, handPosition);
+        }
+        /*else if(inventoryObjects > 1)
+        {
+            Instantiate(prefabToInstantiate, handPosition);
+        }*/
+  
+    }
+
+    public void InstantiateOtherFood()
+    {
+        Instantiate(prefabToInstantiate, handPosition);
     }
 }
