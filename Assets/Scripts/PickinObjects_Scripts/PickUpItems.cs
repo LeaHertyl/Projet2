@@ -8,9 +8,17 @@ public class PickUpItems : Interactable
     //si on ajoute rien a ce code, tous les objets qui ont ce code auront quand meme les parametres defini dans le script Interactable
     
     [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
+    private bool Grab;
+    [HideInInspector] public bool isGrabed;
 
-    private bool WasPickedUp;
-    private bool WasThrew;
+    //INVENTORY VERSION
+    /*private bool WasPickedUp;
+    private bool WasThrew;*/
+
+    private void Start()
+    {
+        isGrabed = false;
+    }
 
 
     /// <summary>
@@ -36,6 +44,17 @@ public class PickUpItems : Interactable
     public void PickUp()
     {
         Debug.Log("pick up " + item.name);
+
+        var Player1 = GameObject.FindWithTag("Player1");
+        var PlayerScript = Player1.GetComponent<PlayerBehaviour>();
+        Grab = PlayerScript.grabSomething;
+
+        if(Grab == false)
+        {
+            PlayerScript.grabSomething = true;
+            PlayerScript.InstantiateFood();
+            Destroy(gameObject);
+        }
 
         //INVENTORY VERSION
         /*WasPickedUp = Inventory.instance.Add(item); //WasPickedUp == true si un item a ete ajoute a l'inventaire

@@ -30,8 +30,10 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 direction;
     private bool isjumping;
 
-    public bool isPicking;
-    public bool isThrowing;
+    [HideInInspector] public bool isPicking;
+    [HideInInspector] public bool isThrowing;
+    [HideInInspector] public bool grabSomething;
+
 
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
@@ -67,6 +69,7 @@ public class PlayerBehaviour : MonoBehaviour
         healthBarAffiche.SetMaxHealth(MaxHealth);
         healhBarPlayer.SetMaxHealth(MaxHealth);
 
+        grabSomething = false;
     }
 
     // Update is called once per frame
@@ -74,6 +77,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
+
+
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -114,13 +119,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnThrowPerformed(InputAction.CallbackContext obj)
     {
-        //isThrowing = true; -> INVENTORY VERSION
-        Debug.Log("is throwing input activated");
+        if (grabSomething == true)
+        {
+            isThrowing = true;
+            Debug.Log("is throwing input activated");
+            grabSomething = false;
+        }
     }
 
     private void OnThrowCanceled(InputAction.CallbackContext obj)
     {
-        //isThrowing = false; -> INVENTORY VERSION
+        isThrowing = false;
     }
 
     private Vector3 ApplyMove()

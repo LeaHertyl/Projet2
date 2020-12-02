@@ -19,7 +19,7 @@ public class Items : ScriptableObject
     public bool isFood = true;
     public bool isFruit = false;
 
-    public bool isThrown = false;
+    //public bool isThrown = false;
 
     //virtual parce qu'on veut peut etre qu'il ne se passe pas la meme chose quand on utilise des objets differents
     public virtual void Use()
