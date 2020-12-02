@@ -33,14 +33,6 @@ public class PickUpItems : Interactable
     }
 
 
-    //INVENTORY VERSION
-    /*public override void Thrown()
-    {
-        base.Thrown();
-
-        RemoveFromList();
-    }*/
-
     public void PickUp()
     {
         Debug.Log("pick up " + item.name);
@@ -85,6 +77,14 @@ public class PickUpItems : Interactable
 
         //NO INVENTORY VERSION -> refaire le if mais avec une autre condition
     }
+
+    //INVENTORY VERSION
+    /*public override void Thrown()
+    {
+        base.Thrown();
+
+        RemoveFromList();
+    }*/
 
 
     //INVENTORY VERSION

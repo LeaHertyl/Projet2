@@ -14,8 +14,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] LayerMask GroundMask;
 
-    public HealthBar healthBarAffiche;
-    public HealthBar healhBarPlayer;
+    [SerializeField] private HealthBar healthBarAffiche;
+    [SerializeField] private HealthBar healhBarPlayer;
     public int MaxHealth;
     public int currentHealth;
 
