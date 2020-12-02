@@ -37,10 +37,12 @@ public class Interactable : MonoBehaviour
             hasInteracted = true; //on passe le booléen a true pour indiquer que l'interaction a déjà eu lieu
         }
 
-        if(IsThrowing == true)
+
+        //INVENTORY VERSION
+        /*if(IsThrowing == true)
         {
             Thrown();
-        }
+        }*/
     }
 
     private void OnDrawGizmosSelected ()
@@ -59,12 +61,14 @@ public class Interactable : MonoBehaviour
         Debug.Log("interact with " + transform.name);
     }
 
+
+    //INVENTORY VERSION
     /// <summary>
     /// Fonction globale qu'on va pouvoir modifier
     /// </summary>
-    public virtual void Thrown()
+    /*public virtual void Thrown()
     {
         //indique ce qui va se passer quand le joueur a laché l'objet
         Debug.Log(transform.name + "is threw");
-    }
+    }*/
 }

@@ -24,27 +24,35 @@ public class PickUpItems : Interactable
         PickUp();
     }
 
-    public override void Thrown()
+
+    //INVENTORY VERSION
+    /*public override void Thrown()
     {
         base.Thrown();
 
         RemoveFromList();
-    }
+    }*/
 
     public void PickUp()
     {
         Debug.Log("pick up " + item.name);
 
-        WasPickedUp = Inventory.instance.Add(item); //WasPickedUp == true si un item a ete ajoute a l'inventaire
+        //INVENTORY VERSION
+        /*WasPickedUp = Inventory.instance.Add(item); //WasPickedUp == true si un item a ete ajoute a l'inventaire
 
         if (WasPickedUp)
         {
             Destroy(gameObject);
             Debug.Log("objet detruit");
-        }
+        }*/
+
+
+        //NO INVENTORY VERSION -> refaire le if mais avec une autre condition
     }
 
-    public void RemoveFromList()
+
+    //INVENTORY VERSION
+    /*public void RemoveFromList()
     {
         WasThrew = Inventory.instance.Remove(item);
 
@@ -52,5 +60,5 @@ public class PickUpItems : Interactable
         {
             Debug.Log("yey he is remove");
         }
-    }
+    }*/
 }
