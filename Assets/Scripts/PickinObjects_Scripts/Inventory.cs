@@ -86,7 +86,7 @@ public class Inventory : MonoBehaviour
                 //avant que je rajoute la suite, tout fonctionne tres bien jusque là
                 nmbObjects += 1;
                 Debug.Log("nombre = " + nmbObjects);
-                Player1Script.InstantiateFirstFood();
+                //Player1Script.InstantiateFirstFood(); -> ligne commentee pour ne pas avoir d'erreur
             }
 
             if (onItemChangedCallback != null)

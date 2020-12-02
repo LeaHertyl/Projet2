@@ -38,7 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 MoveDirection;
 
     private int inventoryObjects;
-    //private 
+    
 
     /*
     private RaycastHit Camhit; //RaycastHit pour avoir des informations sur l'objet hit par le raycast
@@ -142,6 +142,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnPickPerformed(InputAction.CallbackContext obj)
     {
+        //Si on appuie sur le bouton, ca passe à vrai
         isPicking = true;
         Debug.Log("is picking input activated");
     }
@@ -153,13 +154,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnThrowPerformed(InputAction.CallbackContext obj)
     {
-        isThrowing = true;
+        //isThrowing = true; -> INVENTORY VERSION
         Debug.Log("is throwing input activated");
     }
 
     private void OnThrowCanceled(InputAction.CallbackContext obj)
     {
-        isThrowing = false;
+        //isThrowing = false; -> INVENTORY VERSION
     }
 
     private Vector3 ApplyMove()
@@ -230,7 +231,14 @@ public class PlayerBehaviour : MonoBehaviour
         healhBarPlayer.SetHeatlh(currentHealth);
     }
 
-    public void InstantiateFirstFood()
+
+    public void InstantiateFood()
+    {
+        Instantiate(prefabToInstantiate, handPosition);
+    }
+
+    //INVENTORY VERSION
+    /*public void InstantiateFirstFood()
     {
         var Inventory = GameObject.FindWithTag("GameManager");
         var InventoryCount = Inventory.GetComponent<Inventory>();
@@ -240,15 +248,15 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Instantiate(prefabToInstantiate, handPosition);
         }
-        /*else if(inventoryObjects > 1)
+        //else if(inventoryObjects > 1)
         {
-            Instantiate(prefabToInstantiate, handPosition);
-        }*/
+            //Instantiate(prefabToInstantiate, handPosition);
+        }//
   
     }
 
     public void InstantiateOtherFood()
     {
         Instantiate(prefabToInstantiate, handPosition);
-    }
+    }*/
 }
