@@ -14,10 +14,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] LayerMask GroundMask;
 
-    [SerializeField] private HealthBar healthBarAffiche;
-    [SerializeField] private HealthBar healhBarPlayer;
-    [SerializeField] private int MaxHealth;
-    [SerializeField] private int currentHealth;
+    public HealthBar healthBarAffiche;
+    public HealthBar healhBarPlayer;
+    public int MaxHealth;
+    public int currentHealth;
 
     [SerializeField] private Transform PlayerFeet;
 
@@ -97,7 +97,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isjumping = true;
         Debug.Log("Yes !");
-        //TakeDamage(20);
+        TakeDamage(20);
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)

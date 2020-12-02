@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb2ab5da0ed9ef4d8e5f41f4a2bcef2, type: 3}
-  m_Name: truc
+  m_Name: Food
   m_EditorClassIdentifier: 
-  name: truc
+  name: FoodItem
   icon: {fileID: 21300000, guid: f6a8600e433b791469b9a3d436be9a51, type: 3}
   isFood: 1
   isFruit: 0
+  isThrown: 0

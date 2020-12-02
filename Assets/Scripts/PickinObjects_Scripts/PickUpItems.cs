@@ -47,14 +47,31 @@ public class PickUpItems : Interactable
 
         var Player1 = GameObject.FindWithTag("Player1");
         var PlayerScript = Player1.GetComponent<PlayerBehaviour>();
+
+        var PlayercurrentHealth = PlayerScript.currentHealth;
+        var PlayermaxHealth = PlayerScript.MaxHealth;
+
         Grab = PlayerScript.grabSomething;
 
-        if(Grab == false)
+        if(item.isFood)
         {
-            PlayerScript.grabSomething = true;
-            PlayerScript.InstantiateFood();
-            Destroy(gameObject);
+            if (Grab == false)
+            {
+                PlayerScript.grabSomething = true;
+                PlayerScript.InstantiateFood();
+                Destroy(gameObject);
+            }
+
         }
+        else if(item.isFruit)
+        {
+            if(PlayercurrentHealth != PlayermaxHealth)
+            {
+                PlayerScript.Hill(20);
+                Destroy(gameObject);
+            }
+        }
+
 
         //INVENTORY VERSION
         /*WasPickedUp = Inventory.instance.Add(item); //WasPickedUp == true si un item a ete ajoute a l'inventaire

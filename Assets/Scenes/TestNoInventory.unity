@@ -707,7 +707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   player: {fileID: 17848344}
-  item: {fileID: 11400000, guid: 1dffa916c74c0eb40a8e04c6a12bba52, type: 2}
+  item: {fileID: 11400000, guid: 365051b20e0c69041b5314b541e6dc29, type: 2}
   isGrabed: 0
 --- !u!135 &523732585
 SphereCollider:
