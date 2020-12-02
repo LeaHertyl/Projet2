@@ -5,7 +5,6 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private float radius;
-    [SerializeField] private Transform player;
 
     private float distance;
     private bool hasInteracted;
@@ -26,10 +25,9 @@ public class Interactable : MonoBehaviour
     void Update()
     {
         var Player1 = GameObject.FindWithTag("Player1");
-        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
-        IsThrowing = Player1Script.isThrowing;
+        var Player1Transform = Player1.GetComponent<Transform>();
 
-        distance = Vector3.Distance(player.transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
+        distance = Vector3.Distance(Player1Transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
 
         if (distance <= radius && !hasInteracted) //si le joueur est a moins d'une certaine distance et qu'il n'a pas encore interagi avec l'objet
         {

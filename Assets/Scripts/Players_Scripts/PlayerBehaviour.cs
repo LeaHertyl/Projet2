@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int MaxHealth;
     public int currentHealth;
 
+    [SerializeField] private Canvas XButton;
     [SerializeField] private Transform PlayerFeet;
 
     [SerializeField] private GameObject prefabToInstantiate;
@@ -97,7 +99,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isjumping = true;
         Debug.Log("Yes !");
-        TakeDamage(20);
+        //TakeDamage(20);
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)
@@ -205,6 +207,25 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Instantiate(prefabToInstantiate, handPosition);
     }
+
+    public void InstantiateXButton()
+    {
+        Instantiate(XButton);
+    }
+
+    public void DestroyXButton()
+    {
+        Destroy(XButton);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Food")
+        {
+            TakeDamage(20);
+        }
+    }
+
 
     //INVENTORY VERSION
     /*public void InstantiateFirstFood()

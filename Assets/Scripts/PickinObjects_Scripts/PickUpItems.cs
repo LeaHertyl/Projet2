@@ -8,8 +8,10 @@ public class PickUpItems : Interactable
     //si on ajoute rien a ce code, tous les objets qui ont ce code auront quand meme les parametres defini dans le script Interactable
     
     [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
+    
     private bool Grab;
-    [HideInInspector] public bool isGrabed;
+
+    [HideInInspector] public bool isGrabed = true;
 
     //INVENTORY VERSION
     /*private bool WasPickedUp;
@@ -17,7 +19,7 @@ public class PickUpItems : Interactable
 
     private void Start()
     {
-        isGrabed = false;
+        
     }
 
 
@@ -47,10 +49,13 @@ public class PickUpItems : Interactable
 
         if(item.isFood)
         {
+
             if (Grab == false)
             {
+                isGrabed = true;
                 PlayerScript.grabSomething = true;
                 PlayerScript.InstantiateFood();
+                
                 Destroy(gameObject);
             }
 
@@ -60,6 +65,7 @@ public class PickUpItems : Interactable
             if(PlayercurrentHealth != PlayermaxHealth)
             {
                 PlayerScript.Hill(20);
+                isGrabed = true;
                 Destroy(gameObject);
             }
         }
