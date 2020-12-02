@@ -605,6 +605,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cam1
       objectReference: {fileID: 0}
+    - target: {fileID: 2340929766107594155, guid: 8102ad2fa15d07449b59b144e7552b59,
+        type: 3}
+      propertyPath: m_TagString
+      value: Camera1
+      objectReference: {fileID: 0}
     - target: {fileID: 2340929766107594158, guid: 8102ad2fa15d07449b59b144e7552b59,
         type: 3}
       propertyPath: m_RootOrder
