@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Camera1
+  - Player1
+  - Player2
+  - Camera2
+  - InventoryP1
+  - GameManager
+  - Food
   layers:
   - Default
   - TransparentFX

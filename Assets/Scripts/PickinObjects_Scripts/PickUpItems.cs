@@ -8,8 +8,21 @@ public class PickUpItems : Interactable
     //si on ajoute rien a ce code, tous les objets qui ont ce code auront quand meme les parametres defini dans le script Interactable
     
     [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
+    
+    private bool Grab;
+    public bool isPicked;
 
-    private bool WasPickedUp;
+    //[HideInInspector] public bool isGrabed = true;
+
+    //INVENTORY VERSION
+    /*private bool WasPickedUp;
+    private bool WasThrew;*/
+
+    private void Start()
+    {
+        isPicked = false;
+    }
+
 
     /// <summary>
     /// permet de modifier ce qui va se passer quand la fonction virtual void Interact est declenchee
@@ -22,16 +35,75 @@ public class PickUpItems : Interactable
         PickUp();
     }
 
+
     public void PickUp()
     {
-        Debug.Log("pick up " + item.name);
+        //Debug.Log("pick up " + item.name);
 
-        WasPickedUp = Inventory.instance.Add(item);
+        var Player1 = GameObject.FindWithTag("Player1");
+        var PlayerScript = Player1.GetComponent<PlayerBehaviour>();
+
+        var PlayercurrentHealth = PlayerScript.currentHealth;
+        var PlayermaxHealth = PlayerScript.MaxHealth;
+
+        Grab = PlayerScript.grabSomething;
+
+        if(item.isFood)
+        {
+
+            if (Grab == false)
+            {
+                //isGrabed = true;
+                PlayerScript.grabSomething = true;
+                PlayerScript.InstantiateFood();
+
+                isPicked = true;
+
+                Destroy(gameObject);
+            }
+
+        }
+        else if(item.isFruit)
+        {
+            if(PlayercurrentHealth != PlayermaxHealth)
+            {
+                PlayerScript.Hill(20);
+                isPicked = true;
+                Destroy(gameObject);
+            }
+        }
+
+
+        //INVENTORY VERSION
+        /*WasPickedUp = Inventory.instance.Add(item); //WasPickedUp == true si un item a ete ajoute a l'inventaire
 
         if (WasPickedUp)
         {
             Destroy(gameObject);
             Debug.Log("objet detruit");
-        }
+        }*/
+
+
+        //NO INVENTORY VERSION -> refaire le if mais avec une autre condition
     }
+
+    //INVENTORY VERSION
+    /*public override void Thrown()
+    {
+        base.Thrown();
+
+        RemoveFromList();
+    }*/
+
+
+    //INVENTORY VERSION
+    /*public void RemoveFromList()
+    {
+        WasThrew = Inventory.instance.Remove(item);
+
+        if(WasThrew)
+        {
+            Debug.Log("yey he is remove");
+        }
+    }*/
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -16,10 +17,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] private HealthBar healthBarAffiche;
     [SerializeField] private HealthBar healhBarPlayer;
-    [SerializeField] private int MaxHealth;
-    [SerializeField] private int currentHealth;
+    public int MaxHealth;
+    public int currentHealth;
 
+    [SerializeField] private Canvas XButton;
     [SerializeField] private Transform PlayerFeet;
+
+    [SerializeField] private GameObject prefabToInstantiate;
+    [SerializeField] private Transform handPosition;
 
     private Controls controls;
     private CharacterController controller;
@@ -27,16 +32,16 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector2 direction;
     private bool isjumping;
 
+    [HideInInspector] public bool isPicking;
+    [HideInInspector] public bool isThrowing;
+    [HideInInspector] public bool grabSomething;
+
+
     private Vector3 PlayerDirection;
     private Vector3 DirectionToMove;
     private Vector3 MoveDirection;
 
-    private RaycastHit Camhit; //RaycastHit pour avoir des informations sur l'objet hit par le raycast
-    private Ray Camraycast;
-    [SerializeField] private float MaxDistanceToPick;
-
-    [SerializeField] private LayerMask FoodLayerMask;
-    [SerializeField] private LayerMask FruitLayerMask;
+    private int inventoryObjects;
 
 
     private void OnEnable()
@@ -50,6 +55,12 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Jump.performed += OnJumpPerformed;
         controls.Player.Jump.canceled += OnJumpCanceled;
 
+        controls.Player.Pick.performed += OnPickPerformed;
+        controls.Player.Pick.canceled += OnPickCanceled;
+
+        controls.Player.Throw.performed += OnThrowPerformed;
+        controls.Player.Throw.canceled += OnThrowCanceled;
+
         controller = GetComponent<CharacterController>();
     }
 
@@ -59,6 +70,8 @@ public class PlayerBehaviour : MonoBehaviour
         currentHealth = MaxHealth;
         healthBarAffiche.SetMaxHealth(MaxHealth);
         healhBarPlayer.SetMaxHealth(MaxHealth);
+
+        grabSomething = false;
     }
 
     // Update is called once per frame
@@ -67,34 +80,7 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove * Time.deltaTime);
 
-        Debug.DrawRay(PlayerCamera.transform.position, transform.TransformDirection(Vector3.forward) * MaxDistanceToPick, Color.red); //permet d'afficher le rayon
 
-        var Foodraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FoodLayerMask);
-        var Fruitraycast = Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Camhit, MaxDistanceToPick, FruitLayerMask);
-
-        /*
-        //l'origine du raycast,sa direction, les informations sur l'objet collide, la distance max de l'objet collide, le Layer sur lequel sont les objets qu'on veut collider
-        if (Foodraycast) 
-        {
-            Interactable interactable = Camhit.collider.GetComponent<Interactable>();
-
-            if(interactable != null)
-            {
-                Debug.Log("wut");
-            }
-        }
-
-        if (Fruitraycast)
-        {
-            Interactable interactable = Camhit.collider.GetComponent<Interactable>();
-
-            if(interactable != null)
-            {
-                Debug.Log("ah");
-            }
-            //Affichage de quel bouton on doit enclencher pour ramasser l'objet
-            //si on clique dessus : l'objet disparait et la vie du joueur remonte
-        }*/
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -113,12 +99,39 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isjumping = true;
         Debug.Log("Yes !");
-        TakeDamage(20);
+        //TakeDamage(20);
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)
     {
         isjumping = false;
+    }
+
+    public void OnPickPerformed(InputAction.CallbackContext obj)
+    {
+        //Si on appuie sur le bouton, ca passe à vrai
+        isPicking = true;
+        //Debug.Log("is picking input activated");
+    }
+
+    private void OnPickCanceled(InputAction.CallbackContext obj)
+    {
+        isPicking = false;
+    }
+
+    public void OnThrowPerformed(InputAction.CallbackContext obj)
+    {
+        if (grabSomething == true)
+        {
+            isThrowing = true;
+            //Debug.Log("is throwing input activated");
+            grabSomething = false;
+        }
+    }
+
+    private void OnThrowCanceled(InputAction.CallbackContext obj)
+    {
+        isThrowing = false;
     }
 
     private Vector3 ApplyMove()
@@ -175,10 +188,65 @@ public class PlayerBehaviour : MonoBehaviour
         return JumpVector;
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBarAffiche.SetHeatlh(currentHealth);
         healhBarPlayer.SetHeatlh(currentHealth);
     }
+
+    public void Hill(int hill)
+    {
+        currentHealth += hill;
+        healthBarAffiche.SetHeatlh(currentHealth);
+        healhBarPlayer.SetHeatlh(currentHealth);
+    }
+
+
+    public void InstantiateFood()
+    {
+        Instantiate(prefabToInstantiate, handPosition);
+    }
+
+    public void InstantiateXButton()
+    {
+        Instantiate(XButton);
+    }
+
+    public void DestroyXButton()
+    {
+        Destroy(XButton);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Food")
+        {
+            TakeDamage(20);
+        }
+    }
+
+
+    //INVENTORY VERSION
+    /*public void InstantiateFirstFood()
+    {
+        var Inventory = GameObject.FindWithTag("GameManager");
+        var InventoryCount = Inventory.GetComponent<Inventory>();
+        inventoryObjects = InventoryCount.nmbObjects;
+
+        if(inventoryObjects == 1)
+        {
+            Instantiate(prefabToInstantiate, handPosition);
+        }
+        //else if(inventoryObjects > 1)
+        {
+            //Instantiate(prefabToInstantiate, handPosition);
+        }//
+  
+    }
+
+    public void InstantiateOtherFood()
+    {
+        Instantiate(prefabToInstantiate, handPosition);
+    }*/
 }

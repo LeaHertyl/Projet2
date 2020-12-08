@@ -16,7 +16,8 @@ public class InventoryUI : MonoBehaviour
         inventoryref.onItemChangedCallback += UpdateUI; //on veut ajouter UpdateUI a la liste de methodes a effectuer quand l'evenement onItemChangedCallback est appele
 
         //moins performant de le mettre dans l'Update mais necessaire si les Slots sont amenes a changer
-        slots = itemsParent.GetComponentsInChildren<InventorySlot>(); //on recupere tous les enfants qui ont le composants InventorySlot (bien mettre le GetComponentS au pluriel -> pls enfants a recuperer)
+        slots = itemsParent.GetComponentsInChildren<InventorySlot>(); //on recupere tous les enfants qui ont le composants InventorySlot (bien mettre le GetComponentS au pluriel -> pls enfants a recuperer
+
     }
 
     // Update is called once per frame
@@ -29,8 +30,7 @@ public class InventoryUI : MonoBehaviour
     {
         Debug.Log("Updating UI");
 
-        //
-        for(int i = 0; i < slots.Length; i++) //verifie que ca ne depasse pas la taille de l'array qui contient le nombre de slots
+        for (int i = 0; i < slots.Length; i++) //verifie que ca ne depasse pas la taille de l'array qui contient le nombre de slots
         {
             if(i < inventoryref.itemList.Count) //si la condition est verifiee : il y a un item a ajouter
             {
@@ -43,7 +43,10 @@ public class InventoryUI : MonoBehaviour
             else //s'il n'y a pas d'item a ajouter
             {
                 slots[i].ClearSlot(); //on effectue la fonction ClearSlot d'InventorySlot sur le slot sur lequel on n'a rien a mettre
+                Debug.Log("clearslot");
+                
             }
         }
+
     }
 }
