@@ -10,8 +10,9 @@ public class PickUpItems : Interactable
     [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
     
     private bool Grab;
+    public bool isPicked;
 
-    [HideInInspector] public bool isGrabed = true;
+    //[HideInInspector] public bool isGrabed = true;
 
     //INVENTORY VERSION
     /*private bool WasPickedUp;
@@ -19,7 +20,7 @@ public class PickUpItems : Interactable
 
     private void Start()
     {
-        
+        isPicked = false;
     }
 
 
@@ -37,7 +38,7 @@ public class PickUpItems : Interactable
 
     public void PickUp()
     {
-        Debug.Log("pick up " + item.name);
+        //Debug.Log("pick up " + item.name);
 
         var Player1 = GameObject.FindWithTag("Player1");
         var PlayerScript = Player1.GetComponent<PlayerBehaviour>();
@@ -52,10 +53,12 @@ public class PickUpItems : Interactable
 
             if (Grab == false)
             {
-                isGrabed = true;
+                //isGrabed = true;
                 PlayerScript.grabSomething = true;
                 PlayerScript.InstantiateFood();
-                
+
+                isPicked = true;
+
                 Destroy(gameObject);
             }
 
@@ -65,7 +68,7 @@ public class PickUpItems : Interactable
             if(PlayercurrentHealth != PlayermaxHealth)
             {
                 PlayerScript.Hill(20);
-                isGrabed = true;
+                isPicked = true;
                 Destroy(gameObject);
             }
         }

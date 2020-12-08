@@ -33,7 +33,7 @@ public class Object_Throw : MonoBehaviour
         {
             myRB.useGravity = true;
             myRB.AddForce(Camera1Transform.forward * throwForce);
-            Debug.Log(isthrowing);
+            //Debug.Log(isthrowing);
         }
 
         if(transform.position.y <= -20)

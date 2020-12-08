@@ -111,7 +111,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //Si on appuie sur le bouton, ca passe à vrai
         isPicking = true;
-        Debug.Log("is picking input activated");
+        //Debug.Log("is picking input activated");
     }
 
     private void OnPickCanceled(InputAction.CallbackContext obj)
@@ -124,7 +124,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (grabSomething == true)
         {
             isThrowing = true;
-            Debug.Log("is throwing input activated");
+            //Debug.Log("is throwing input activated");
             grabSomething = false;
         }
     }

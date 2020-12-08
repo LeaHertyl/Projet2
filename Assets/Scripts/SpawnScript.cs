@@ -8,6 +8,9 @@ public class SpawnScript : MonoBehaviour
     private int random;
     private GameObject obj;
 
+    private bool Grabed;
+
+    private bool isFull;
     private float timer;
 
     // Start is called before the first frame update
@@ -18,23 +21,38 @@ public class SpawnScript : MonoBehaviour
         Debug.Log(obj);
         Instantiate(obj, transform.position, Quaternion.identity);
 
+        isFull = true;
+
         timer = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         var objectscript = obj.GetComponent<PickUpItems>();
-        var Grabed = objectscript.isGrabed;
+        Grabed = objectscript.isPicked;
+
         Debug.Log(Grabed);
 
-        timer -= Time.deltaTime;
-        //Debug.Log(timer);
+        if (isFull == false)
+        {
+            timer = 10;
 
-        if(Grabed == true)
+            timer -= Time.deltaTime;
+            //Debug.Log(timer);
+        }
+
+        if(timer <= 0)
+        {
+            Debug.Log("hello");
+        }
+
+
+        /*if (Grabed == true)
         {
             Debug.Log("grabed is true");
-        }
+        }*/
 
     }
 }

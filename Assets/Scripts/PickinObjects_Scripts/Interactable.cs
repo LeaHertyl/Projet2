@@ -56,7 +56,7 @@ public class Interactable : MonoBehaviour
     public virtual void Interact()
     {
         //Indique ce qu'il va se passer une fois que le joueur a interragi avec l'objet
-        Debug.Log("interact with " + transform.name);
+        //Debug.Log("interact with " + transform.name);
     }
 
 
