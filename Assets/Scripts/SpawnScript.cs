@@ -8,44 +8,45 @@ public class SpawnScript : MonoBehaviour
     private int random;
     private GameObject obj;
 
-    private bool Grabed;
-
-    private bool isFull;
     private float timer;
+
+    private PickUpItems pick;
 
     // Start is called before the first frame update
     void Start()
     {
         random = Random.Range(0, ObjectToCollect.Length);
         obj = ObjectToCollect[random];
+
         Debug.Log(obj);
-        Instantiate(obj, transform.position, Quaternion.identity);
+        pick = Instantiate(obj, transform.position, Quaternion.identity).GetComponent<PickUpItems>();
 
-        isFull = true;
-
-        timer = 10;
+        timer = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        var objectscript = obj.GetComponent<PickUpItems>();
-        Grabed = objectscript.isPicked;
-
-        Debug.Log(Grabed);
-
-        if (isFull == false)
+        if (pick != null)
         {
-            timer = 10;
 
+            if(pick.isPicked)
+            {
+                pick = null;
+            }
+
+        }
+        else
+        {
             timer -= Time.deltaTime;
-            //Debug.Log(timer);
         }
 
         if(timer <= 0)
         {
-            Debug.Log("hello");
+            timer = 2;
+
+            pick = Instantiate(obj, transform.position, Quaternion.identity).GetComponent<PickUpItems>();
         }
 
 
