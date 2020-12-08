@@ -4,32 +4,28 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private float radius;
+    [SerializeField] private float radius; //on cree une variable serialisee de type float
 
-    private float distance;
-    private bool hasInteracted;
-    private bool isThrew;
-
-    private bool PickingBool;
-    private bool TruePick;
-
-    private bool IsThrowing;
+    private float distance; //on cree une variable de type float
+    private bool hasInteracted; //on cree un booleen
 
     // Start is called before the first frame update
     void Start()
     {
-        hasInteracted = false;
+        hasInteracted = false; //on indique qu'au lancement du jeu, la valeur du booleen est False
     }
 
     // Update is called once per frame
     void Update()
     {
+        //on recupere le composant Transform du GameObject qui a le tag Player1
         var Player1 = GameObject.FindWithTag("Player1");
         var Player1Transform = Player1.GetComponent<Transform>();
 
         distance = Vector3.Distance(Player1Transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
 
-        if (distance <= radius && !hasInteracted) //si le joueur est a moins d'une certaine distance et qu'il n'a pas encore interagi avec l'objet
+        //si le joueur est a moins d'une certaine distance et qu'il n'a pas encore interagi avec l'objet
+        if (distance <= radius && !hasInteracted)
         {
             Interact(); //on appelle la fonction Interact
             hasInteracted = true; //on passe le booléen a true pour indiquer que l'interaction a déjà eu lieu

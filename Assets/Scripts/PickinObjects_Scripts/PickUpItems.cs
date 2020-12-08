@@ -9,10 +9,8 @@ public class PickUpItems : Interactable
     
     [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
     
-    private bool Grab;
-    public bool isPicked;
-
-    //[HideInInspector] public bool isGrabed = true;
+    private bool Grab; //on cree une varibale de type booleen
+    public bool isPicked; //on cree une varibale de type booleen, publique pour pouvoir y acceder depuis un autre script
 
     //INVENTORY VERSION
     /*private bool WasPickedUp;
@@ -20,7 +18,7 @@ public class PickUpItems : Interactable
 
     private void Start()
     {
-        isPicked = false;
+        isPicked = false; //on attribue la valeur false au booleen au lancement du jeu
     }
 
 
@@ -40,37 +38,45 @@ public class PickUpItems : Interactable
     {
         //Debug.Log("pick up " + item.name);
 
+        //on recupere le script PlayerBehaviour qui se trouve sur le GameObject ayant le tag Player 1
         var Player1 = GameObject.FindWithTag("Player1");
-        var PlayerScript = Player1.GetComponent<PlayerBehaviour>();
+        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
 
-        var PlayercurrentHealth = PlayerScript.currentHealth;
-        var PlayermaxHealth = PlayerScript.MaxHealth;
+        var Player1currentHealth = Player1Script.currentHealth; //on associe la valeur de la variable currentHealth du script PlayerBehaviour a la varibale Player1currentHealth
+        var Player1maxHealth = Player1Script.MaxHealth; //on associe la valeur de la variable MaxHealth du script PlayerBehaviour a la varibale Player1maxhealth
 
-        Grab = PlayerScript.grabSomething;
+        Grab = Player1Script.grabSomething; //on associe la valeur de la variable grabsomething du script PlayerBehaviour a la varibale Grab
 
-        if(item.isFood)
+        
+        if (item.isFood)
         {
-
+            //si la variable Grab est fausse -> si la variable grabsomething de PlayerBehaviour est fausse -> si le Player ne tient rien dans sa main
             if (Grab == false)
             {
                 //isGrabed = true;
-                PlayerScript.grabSomething = true;
-                PlayerScript.InstantiateFood();
+                Player1Script.grabSomething = true; //on passe la variable grabsomething du script PlayerBehaviour a true -> indique qu'on tient quelque chose et va permettre de le lancer
+                Player1Script.InstantiateFood(); //on lance la fonction InstantiateFood du script PlayerBehaviour -> fait apparaitre la nourriture a lancer dans la main du Player
 
-                isPicked = true;
+                isPicked = true; //on passe le booleen a true -> va indiquer au point de spwan qu'il est vide
 
-                Destroy(gameObject);
+                Destroy(gameObject); //on detruit le GameObject auquel ce script est associe
             }
 
         }
-        else if(item.isFruit)
+        //si le booleen True de l'item avec lequel on veut interagir est isFruit
+        else if (item.isFruit)
         {
-            if(PlayercurrentHealth != PlayermaxHealth)
+
+            //si la sante actuelle du Player n'est pas egale a sa sante maximale -> s'il a subit des degats
+            if(Player1currentHealth != Player1maxHealth)
             {
-                PlayerScript.Hill(20);
-                isPicked = true;
-                Destroy(gameObject);
+                Player1Script.Hill(20); //on lance la fonction Hill du script PlayerBehaviour
+
+                isPicked = true; //on passe le booleen a true -> va indiquer au point de spwan qu'il est vide
+
+                Destroy(gameObject);//on detruit le GameObject auquel ce script est associe
             }
+        }
         }
 
 
