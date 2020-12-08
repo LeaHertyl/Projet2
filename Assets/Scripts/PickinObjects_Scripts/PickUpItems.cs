@@ -91,7 +91,7 @@ public class PickUpItems : Interactable
 
 
         //NO INVENTORY VERSION -> refaire le if mais avec une autre condition
-    }
+    
 
     //INVENTORY VERSION
     /*public override void Thrown()
