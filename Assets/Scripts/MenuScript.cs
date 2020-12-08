@@ -53,7 +53,6 @@ public class MenuScript : MonoBehaviour
             if (loading.progress >= 0.9f)
             {
                 loading.allowSceneActivation = true;
-                loadingAnimator.SetTrigger("EndLoading");
             }
 
             yield return new WaitForSeconds(animationTime); // c'est le temps d'attente que toutes les anims soient jouées
