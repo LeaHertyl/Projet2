@@ -5,9 +5,11 @@ using UnityEngine;
 public class Object_Throw : MonoBehaviour
 {
     [SerializeField] private float throwForce; //on cree une variable serialisee de type float
+    [SerializeField] private GameObject ExplosionEffect;
 
     private bool isthrowing; //on cree un booleen
     private Rigidbody myRB; //on cree une variable de type Rigibody
+    private GameObject ExplosionToDestroy;
 
     //private Transform transform;
 
@@ -41,6 +43,17 @@ public class Object_Throw : MonoBehaviour
         if(transform.position.y <= -20)
         {
             Destroy(gameObject); //on detruit le gameObject associe a ce script -> permet de supprimer les objets quand ils ont ete lance et qu'on ne les voit plus dans la scene et qu'ils ne tombent pas a l'infini
+            Destroy(ExplosionToDestroy);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Explod();
+    }
+
+    private void Explod()
+    {
+        ExplosionToDestroy = Instantiate(ExplosionEffect, transform.position, transform.rotation);
     }
 }
