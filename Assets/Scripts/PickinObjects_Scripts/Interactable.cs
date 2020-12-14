@@ -27,7 +27,7 @@ public class Interactable : MonoBehaviour
 
         //on recupere le composant Transform du GameObject qui a le tag Player2
         var Player2 = GameObject.FindWithTag("Player2");
-        var Player2Transform = Player1.GetComponent<Transform>();
+        var Player2Transform = Player2.GetComponent<Transform>();
 
         distance1 = Vector3.Distance(Player1Transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
         distance2 = Vector3.Distance(Player2Transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
@@ -39,7 +39,7 @@ public class Interactable : MonoBehaviour
             hasInteracted = true; //on passe le booléen a true pour indiquer que l'interaction a déjà eu lieu
         }
 
-        if(distance2 <= radius && hasInteracted2)
+        if(distance2 <= radius && !hasInteracted2)
         {
             Interact2();
             hasInteracted2 = true;
