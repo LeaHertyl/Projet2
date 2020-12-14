@@ -38,6 +38,11 @@ public class SpawnScript : MonoBehaviour
                 pick = null; //on redonne a pick la valeur null
             }
 
+            if(pick.isPicked2)
+            {
+                pick = null;
+            }
+
         }
         else //si aucun objet n'a ete instancie
         {

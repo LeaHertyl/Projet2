@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1922384288184328396}
   - component: {fileID: 1933916690269774218}
   - component: {fileID: 1941664748289790714}
+  - component: {fileID: -7719429979056206114}
   m_Layer: 0
   m_Name: Bread (1)
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7719429979056206114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918557832546803736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371a45e8b5cd9584693dadb3df252e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 0
+  ExplosionEffect: {fileID: 0}

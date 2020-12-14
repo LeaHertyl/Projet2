@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Object_Throw : MonoBehaviour
 {
-    [SerializeField] private float throwForce; //on cree une variable serialisee de type float
+    [SerializeField] private float throwForce;
     [SerializeField] private GameObject ExplosionEffect;
 
     private bool isthrowing; //on cree un booleen
+    private bool isthrowing2;
     private Rigidbody myRB; //on cree une variable de type Rigibody
     private GameObject ExplosionToDestroy;
 
@@ -24,19 +25,35 @@ public class Object_Throw : MonoBehaviour
     {
         //on recupere le script PlayerBehaviour qui se trouve sur le GameObject ayant le tag Player 1
         var Player1 = GameObject.FindWithTag("Player1");
-        var PlayerScript = Player1.GetComponent<PlayerBehaviour>();
+        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
 
         //on recupere le composant Transform qui se trouve sur le GameObject ayant le tag Camera1
         var Player1Camera = GameObject.FindWithTag("Camera1");
         var Camera1Transform = Player1Camera.GetComponent<Transform>();
         
-        isthrowing = PlayerScript.isThrowing; //on associe la valeur de la variable isThrowing du script PlayerBehaviour a la varibale isthrowing
+        isthrowing = Player1Script.isThrowing; //on associe la valeur de la variable isThrowing du script PlayerBehaviour a la varibale isthrowing
+
+        //on recupere le script PlayerBehaviour qui se trouve sur le GameObject ayant le tag Player 1
+        var Player2 = GameObject.FindWithTag("Player2");
+        var Player2Script = Player1.GetComponent<Player2Behaviour>();
+
+        //on recupere le composant Transform qui se trouve sur le GameObject ayant le tag Camera1
+        var Player2Camera = GameObject.FindWithTag("Camera2");
+        var Camera2Transform = Player2Camera.GetComponent<Transform>();
+
+        isthrowing2 = Player2Script.isThrowing; //on associe la valeur de la variable isThrowing du script PlayerBehaviour a la varibale isthrowing
 
         //si isthrowing == true -> si isThrowing == true -> si le Player a enclenche l'input pour lancer les objets et qu'il avait un objet dans la main
         if (isthrowing)
         {
             myRB.useGravity = true; //on active la gravite sur le composant Rigidbody de l'objet -> pour qu'il ait une physique et retombe apres avoir ete lance
             myRB.AddForce(Camera1Transform.forward * throwForce); //on ajoute une force a l'objet en direction de la ou regarde la camera pour le lancer devant le Player selon une force definie
+        }
+
+        if(isthrowing2)
+        {
+            myRB.useGravity = true;
+            myRB.AddForce(Camera2Transform.forward * throwForce);
         }
 
         //si la position en y de l'objet est inferieure ou egale a -20
