@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd53438fad1c6c241b55d8e572df67c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 5
   item: {fileID: 11400000, guid: 365051b20e0c69041b5314b541e6dc29, type: 2}
   isPicked: 0
+  isPicked2: 0
 --- !u!1001 &1865645216864217521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,15 +107,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012037240470, guid: 78a6a596f3cdc2641b44bb3d371c8db0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4000012037240470, guid: 78a6a596f3cdc2641b44bb3d371c8db0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4000012037240470, guid: 78a6a596f3cdc2641b44bb3d371c8db0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4000012037240470, guid: 78a6a596f3cdc2641b44bb3d371c8db0, type: 3}
       propertyPath: m_LocalPosition.x

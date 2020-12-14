@@ -57,7 +57,7 @@ public class Object_Throw : MonoBehaviour
         }
 
         //si la position en y de l'objet est inferieure ou egale a -20
-        if(transform.position.y <= -20)
+        if(transform.position.y <= -4)
         {
             Destroy(gameObject); //on detruit le gameObject associe a ce script -> permet de supprimer les objets quand ils ont ete lance et qu'on ne les voit plus dans la scene et qu'ils ne tombent pas a l'infini
             Destroy(ExplosionToDestroy); //on detruit le gameObject correspondant aux particules d'explosion pour qu'elles se détruisent en même temps que l'objet

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4161458787449466766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.979522, y: 0.446638, z: -11.996411}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 9, y: 9, z: 9}
   m_Children:
   - {fileID: 5768124655566392670}
   m_Father: {fileID: 0}
@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd53438fad1c6c241b55d8e572df67c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 5
   item: {fileID: 11400000, guid: 365051b20e0c69041b5314b541e6dc29, type: 2}
   isPicked: 0
+  isPicked2: 0
 --- !u!1001 &4162440106046600827
 PrefabInstance:
   m_ObjectHideFlags: 0
