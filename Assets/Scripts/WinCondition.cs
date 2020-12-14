@@ -26,9 +26,13 @@ public class WinCondition : MonoBehaviour
 
         var Player2currentHealth = Player2Script.currentHealth2;
 
-        if(Player1currentHealth == 0 || Player2currentHealth == 0)
+        if(Player1currentHealth == 0)
         {
-            SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("EndSceneP1");
+        }
+        else if(Player2currentHealth == 0)
+        {
+            SceneManager.LoadScene("EndSceneP2");
         }
     }
 }
