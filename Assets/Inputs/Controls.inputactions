@@ -222,11 +222,27 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Jump2",
+                    "type": "Button",
+                    "id": "b9db9d35-2ee0-4d9c-b6fd-98c43730388c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Throw2",
+                    "type": "Button",
+                    "id": "ac46df6e-eedd-4635-a745-3e5779a61077",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
-                    "name": "arrows",
+                    "name": "ZQSD",
                     "id": "bef831bb-9f63-4acf-8393-2d6293d08204",
                     "path": "2DVector",
                     "interactions": "",
@@ -239,7 +255,7 @@
                 {
                     "name": "up",
                     "id": "1b9b5d66-0a0f-44de-a6a5-772479beb291",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -250,7 +266,7 @@
                 {
                     "name": "down",
                     "id": "20be7f3d-ce65-4b84-8821-6f7922ece60a",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -261,7 +277,7 @@
                 {
                     "name": "left",
                     "id": "ed2a1753-7884-45d4-93d3-5cd008c351e0",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -272,7 +288,7 @@
                 {
                     "name": "right",
                     "id": "0a14d948-6cf4-4d80-b923-1cbce0113e20",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -288,6 +304,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4035cd8-077b-4b64-b7b4-d85fd92b1340",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "653e27c3-654a-4ab5-ae24-924cbbe7f0bc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
