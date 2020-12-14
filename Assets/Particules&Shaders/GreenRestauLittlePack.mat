@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreenGlowRestauLittlePack
+  m_Name: GreenRestauLittlePack
   m_Shader: {fileID: -6465566751694194690, guid: b820c070d75e01e48814e507bea2806f,
     type: 3}
   m_ShaderKeywords: 
