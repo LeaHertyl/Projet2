@@ -35,7 +35,7 @@ public class Object_Throw : MonoBehaviour
 
         //on recupere le script PlayerBehaviour qui se trouve sur le GameObject ayant le tag Player 1
         var Player2 = GameObject.FindWithTag("Player2");
-        var Player2Script = Player1.GetComponent<Player2Behaviour>();
+        var Player2Script = Player2.GetComponent<Player2Behaviour>();
 
         //on recupere le composant Transform qui se trouve sur le GameObject ayant le tag Camera1
         var Player2Camera = GameObject.FindWithTag("Camera2");
