@@ -2119,3 +2119,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d9283626514874baf077ef3ff4625f, type: 3}
+--- !u!1001 &7624466528905128439
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7624466527693418068, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654245, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624466527886654246, guid: 1f25333f0b2b43a4f9fde35988863eed,
+        type: 3}
+      propertyPath: m_Name
+      value: FruitParticules
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1f25333f0b2b43a4f9fde35988863eed, type: 3}
