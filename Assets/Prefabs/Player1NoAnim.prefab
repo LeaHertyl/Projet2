@@ -183,6 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2005908096953236668}
   - component: {fileID: 2005908096953236671}
+  - component: {fileID: -470161441684040288}
   m_Layer: 0
   m_Name: Player1NoAnim
   m_TagString: Player1
@@ -227,6 +228,39 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-470161441684040288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005908096953236670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c2f638e00355d4d9d4f03e1a7be702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 15
+  Gravity: -40
+  TurnSpeed: 300
+  JumpForce: 3
+  Player1Camera: {fileID: 2340929766107594153, guid: 8102ad2fa15d07449b59b144e7552b59,
+    type: 3}
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  healthBar1Affiche: {fileID: 0}
+  healhBar1Player: {fileID: 0}
+  MaxHealth: 100
+  currentHealth1: 0
+  XButton: {fileID: 8798973516977685836, guid: 3c3f0c066a3eca646a30c7ed1ebd8c2e, type: 3}
+  Player1Feet: {fileID: 0}
+  prefabToInstantiate: {fileID: 2770847982013758875, guid: 3ac3abb01c7e78447a8974a3a782e91d,
+    type: 3}
+  hand1Position: {fileID: 0}
+  isPicking: 0
+  isThrowing: 0
+  grabSomething: 0
 --- !u!1 &2005908097551600534
 GameObject:
   m_ObjectHideFlags: 0

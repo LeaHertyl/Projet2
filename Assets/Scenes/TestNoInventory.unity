@@ -1343,44 +1343,6 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 1961502700}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1963782087 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2005908096953236670, guid: 24935f1950af29b428d832a59d5f213f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1026366112594906001}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1963782088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963782087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c2f638e00355d4d9d4f03e1a7be702, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 5
-  Gravity: -40
-  TurnSpeed: 300
-  JumpForce: 2
-  Player1Camera: {fileID: 515162757}
-  GroundMask:
-    serializedVersion: 2
-    m_Bits: 256
-  healthBar1Affiche: {fileID: 775580370}
-  healhBar1Player: {fileID: 1026366112594906002}
-  MaxHealth: 100
-  currentHealth1: 0
-  XButton: {fileID: 8798973516977685836, guid: 3c3f0c066a3eca646a30c7ed1ebd8c2e, type: 3}
-  Player1Feet: {fileID: 1026366112594906003}
-  prefabToInstantiate: {fileID: 2770847982013758875, guid: 3ac3abb01c7e78447a8974a3a782e91d,
-    type: 3}
-  hand1Position: {fileID: 1026366112594906004}
-  isPicking: 0
-  isThrowing: 0
-  grabSomething: 0
 --- !u!1 &2124834483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1450,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: Player1Feet
+      value: 
+      objectReference: {fileID: 1026366112594906003}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: Player1Camera
+      value: 
+      objectReference: {fileID: 515162757}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: hand1Position
+      value: 
+      objectReference: {fileID: 1026366112594906004}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: healhBar1Player
+      value: 
+      objectReference: {fileID: 1026366112594906002}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: healthBar1Affiche
+      value: 
+      objectReference: {fileID: 775580370}
     - target: {fileID: 2005908096714211740, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
       propertyPath: OtherPlayercamera
@@ -1556,7 +1543,7 @@ PrefabInstance:
     - target: {fileID: 2005908097551600534, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5722929740894820754, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
