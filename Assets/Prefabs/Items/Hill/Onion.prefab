@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd53438fad1c6c241b55d8e572df67c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
+  radius: 3
   item: {fileID: 11400000, guid: 365051b20e0c69041b5314b541e6dc29, type: 2}
   isPicked: 0
 --- !u!1 &3243582332497065475

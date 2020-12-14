@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd53438fad1c6c241b55d8e572df67c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
+  radius: 3
   item: {fileID: 11400000, guid: 1dffa916c74c0eb40a8e04c6a12bba52, type: 2}
   isPicked: 0
 --- !u!1001 &8458618119242546354
