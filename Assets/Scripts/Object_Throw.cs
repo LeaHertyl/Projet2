@@ -74,7 +74,10 @@ public class Object_Throw : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Explod(); //on appelle la fonction Explod() quand l'objet en trigger un autre
+        if(other.gameObject.tag == "Ground")
+        {
+            Explod(); //on appelle la fonction Explod() quand l'objet en trigger un autre
+        }
     }
 
     private void Explod()
