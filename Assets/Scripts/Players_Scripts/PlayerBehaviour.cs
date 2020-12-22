@@ -11,20 +11,20 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float TurnSpeed;
     [SerializeField] private float JumpForce;
 
-    [SerializeField] private Camera PlayerCamera;
+    [SerializeField] private Camera Player1Camera;
 
     [SerializeField] LayerMask GroundMask;
 
-    [SerializeField] private HealthBar healthBarAffiche;
-    [SerializeField] private HealthBar healhBarPlayer;
+    [SerializeField] private HealthBar healthBar1Affiche;
+    [SerializeField] private HealthBar healhBar1Player;
     public int MaxHealth;
-    public int currentHealth;
+    public int currentHealth1;
 
     [SerializeField] private Canvas XButton;
-    [SerializeField] private Transform PlayerFeet;
+    [SerializeField] private Transform Player1Feet;
 
     [SerializeField] private GameObject prefabToInstantiate;
-    [SerializeField] private Transform handPosition;
+    [SerializeField] private Transform hand1Position;
 
     private Controls controls;
     private CharacterController controller;
@@ -37,9 +37,9 @@ public class PlayerBehaviour : MonoBehaviour
     [HideInInspector] public bool grabSomething;
 
 
-    private Vector3 PlayerDirection;
-    private Vector3 DirectionToMove;
-    private Vector3 MoveDirection;
+    private Vector3 PlayerDirection1;
+    private Vector3 DirectionToMove1;
+    private Vector3 MoveDirection1;
 
 
     /// <summary>
@@ -74,9 +74,9 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = MaxHealth; //on indique qu'au lancement du jeu la sante du joueur est au maximum
-        healthBarAffiche.SetMaxHealth(MaxHealth); //on indique qu'au lancement du jeu la barre de vie sur l'ecran du joueur est pleine
-        healhBarPlayer.SetMaxHealth(MaxHealth); //on indique qu'au lancement du jeu la barre de vie au dessus du joueur est pleine
+        currentHealth1 = MaxHealth; //on indique qu'au lancement du jeu la sante du joueur est au maximum
+        healthBar1Affiche.SetMaxHealth(MaxHealth); //on indique qu'au lancement du jeu la barre de vie sur l'ecran du joueur est pleine
+        healhBar1Player.SetMaxHealth(MaxHealth); //on indique qu'au lancement du jeu la barre de vie au dessus du joueur est pleine
 
         grabSomething = false; //on indique que le booleen est false -> le joueur ne tient rien au lancement du jeu
     }
@@ -85,8 +85,8 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         //on donne pour valeur au Vector3 l'addition des trois vector3 correspondant a ce que les fonctions ApplyMove(), ApplyJump() et ApplyGravity retournent
-        DirectionToMove = ApplyMove() + ApplyJump() + ApplyGravity();
-        controller.Move(DirectionToMove * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
+        DirectionToMove1 = ApplyMove() + ApplyJump() + ApplyGravity();
+        controller.Move(DirectionToMove1 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
@@ -94,14 +94,14 @@ public class PlayerBehaviour : MonoBehaviour
         //quand l'input est enclenche, on donne au vector2 direction la valeur d'obj
         direction = obj.ReadValue<Vector2>();
         //on transforme le Vector2 ci-dessus en Vector3 en passant 0 en paramètre y car on ne veut pas que le Player bouge sur cet axe
-        PlayerDirection = new Vector3(direction.x, 0, direction.y); //placer cette ligne dans la fonction a la place de l'Update est plus opti
+        PlayerDirection1 = new Vector3(direction.x, 0, direction.y); //placer cette ligne dans la fonction a la place de l'Update est plus opti
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext obj)
     {
         //quand l'input n'est pas enclenche, tous les vecteurs qui font avancer le Player passent a 0 pour qu'il s'arrete
         direction = Vector2.zero;
-        PlayerDirection = Vector3.zero;
+        PlayerDirection1 = Vector3.zero;
     }
 
     public void OnJumpPerformed(InputAction.CallbackContext obj)
@@ -144,27 +144,27 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 ApplyMove()
     {
         //si l'input de deplacement n'est pas enclenche (si la condition est rempli, ce qui est en dehors du if ne sera jamais applique)
-        if(PlayerDirection == Vector3.zero)
+        if(PlayerDirection1 == Vector3.zero)
         {
-            var rotation2 = Quaternion.LookRotation(PlayerDirection); //on cree une variable qui va permettre d'adapter le vector3 PlayerDirection en rotation
-            rotation2 *= Quaternion.Euler(0, PlayerCamera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
+            var rotation2 = Quaternion.LookRotation(PlayerDirection1); //on cree une variable qui va permettre d'adapter le vector3 PlayerDirection en rotation
+            rotation2 *= Quaternion.Euler(0, Player1Camera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation2, TurnSpeed * Time.deltaTime); //on applique a la rotation definie ci-dessus de l'objet auquel ce script est associe
 
-            MoveDirection = rotation2 * Vector3.zero; //Le Player ne va pas se deplacer mais tourner en fonction de l'orientation de la camera
-            return MoveDirection.normalized; //on retourne le Vector3 calcule ci-dessus normalise pour qu'il ait toujours la meme longueur
+            MoveDirection1 = rotation2 * Vector3.zero; //Le Player ne va pas se deplacer mais tourner en fonction de l'orientation de la camera
+            return MoveDirection1.normalized; //on retourne le Vector3 calcule ci-dessus normalise pour qu'il ait toujours la meme longueur
         }
 
-        var rotation = Quaternion.LookRotation(PlayerDirection); //on cree une variable qui va permettre d'adapter le vector3 PlayerDirection en rotation
-        rotation *= Quaternion.Euler(0, PlayerCamera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
+        var rotation = Quaternion.LookRotation(PlayerDirection1); //on cree une variable qui va permettre d'adapter le vector3 PlayerDirection en rotation
+        rotation *= Quaternion.Euler(0, Player1Camera.transform.rotation.eulerAngles.y, 0); //on ajoute a la rotation du joueur, la rotation en y de la camera
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, TurnSpeed * Time.deltaTime); //on applique a la rotation definie ci-dessus de l'objet auquel ce script est associe
 
-        MoveDirection = rotation * Vector3.forward; //le Player va se déplacer tout droit mais oriente selon la rotation
-        return MoveDirection.normalized * Speed; //on retourne le Vector3 calcule ci-dessus multiplie par la vitesse definie du Player
+        MoveDirection1 = rotation * Vector3.forward; //le Player va se déplacer tout droit mais oriente selon la rotation
+        return MoveDirection1.normalized * Speed; //on retourne le Vector3 calcule ci-dessus multiplie par la vitesse definie du Player
     }
 
     private Vector3 ApplyGravity()
     {
-        var startRaycastPos = PlayerFeet.position; //on cree une variable correspondant a la position de l'objet reference en tant que PlayerFeet
+        var startRaycastPos = Player1Feet.position; //on cree une variable correspondant a la position de l'objet reference en tant que PlayerFeet
         var Groundraycast = Physics.Raycast(startRaycastPos, Vector3.down, 0.1f, GroundMask); //point de depart du raycast, direction, taille (0.1f = 10cm), masque avec lequel il va verifier la collision
 
         var DirectionToFall = Vector3.zero; //on cree une variable de type Vector3 egale a 0
@@ -172,13 +172,13 @@ public class PlayerBehaviour : MonoBehaviour
         //si le raycast rencontre un objet qui a le masque GroundMask -> si le Player est sur ou tres proche du sol vu que la taille 
         if (Groundraycast)
         {
-            DirectionToMove.y = 0; //le parametre Y de la variable qui defini le deplacement du Player = 0 -> on n'applique plus la gravite quand le Player ne tombe plus
+            DirectionToMove1.y = 0; //le parametre Y de la variable qui defini le deplacement du Player = 0 -> on n'applique plus la gravite quand le Player ne tombe plus
         }
         else
         {
             //on met time.deltatime ici en + de l'update parce qu'on veut par rapport au temps ecoule au carre (cette valeur doit etre mutliplie par elle meme pour appliquer la gravite)
             //on applique la gravite sur l'axe y du vector3 qu'on va retourner et utiliser pour le mouvement general du Player
-            DirectionToFall = new Vector3(0, DirectionToMove.y + Gravity * Time.deltaTime, 0); 
+            DirectionToFall = new Vector3(0, DirectionToMove1.y + Gravity * Time.deltaTime, 0); 
         }
 
         return DirectionToFall; //on retourne le Vector3 DirectionToFall -> sa valeur depend de ce qui a ete calcule -> de si le Player est en train de tomber ou non
@@ -187,7 +187,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 ApplyJump()
     {
         //si l'input de saut n'est pas enclenche ou que le Player bouge sur l'axy y
-        if (!isjumping || DirectionToMove.y != 0)
+        if (!isjumping || DirectionToMove1.y != 0)
         {
             return Vector3.zero; //on retourne un vector3 nul -> n'aura aucune incidence sur l'addition des vector3 qui permet de calculer le mouvement du Player
         }
@@ -205,9 +205,9 @@ public class PlayerBehaviour : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage; //on enleve la valeur des degats a la sante restante au Player a cet instant
-        healthBarAffiche.SetHeatlh(currentHealth); //on met a jour la barre de vie affichee sur l'ecran du Player
-        healhBarPlayer.SetHeatlh(currentHealth); //on met a jour la barre de vie affichee au dessus du Player
+        currentHealth1 -= damage; //on enleve la valeur des degats a la sante restante au Player a cet instant
+        healthBar1Affiche.SetHeatlh(currentHealth1); //on met a jour la barre de vie affichee sur l'ecran du Player
+        healhBar1Player.SetHeatlh(currentHealth1); //on met a jour la barre de vie affichee au dessus du Player
     }
 
     /// <summary>
@@ -216,15 +216,15 @@ public class PlayerBehaviour : MonoBehaviour
     /// <param name="hill"></param>
     public void Hill(int hill)
     {
-        currentHealth += hill; //on ajoute la valeur du soin a la sante restante du Player a cet instant
-        healthBarAffiche.SetHeatlh(currentHealth); //on met a jour la barre de vie affichee sur l'ecran du Player
-        healhBarPlayer.SetHeatlh(currentHealth); //on met a jour la barre de vie affichee au dessus du Player
+        currentHealth1 += hill; //on ajoute la valeur du soin a la sante restante du Player a cet instant
+        healthBar1Affiche.SetHeatlh(currentHealth1); //on met a jour la barre de vie affichee sur l'ecran du Player
+        healhBar1Player.SetHeatlh(currentHealth1); //on met a jour la barre de vie affichee au dessus du Player
     }
 
 
     public void InstantiateFood()
     {
-        Instantiate(prefabToInstantiate, handPosition); //quand la fonction est appelee, on instancie le prefab reference dans l'inspector a la position du gameObject reference en tant qu'handPosition
+        Instantiate(prefabToInstantiate, hand1Position); //quand la fonction est appelee, on instancie le prefab reference dans l'inspector a la position du gameObject reference en tant qu'handPosition
     }
 
     public void InstantiateXButton()

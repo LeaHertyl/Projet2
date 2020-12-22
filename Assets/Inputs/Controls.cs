@@ -61,61 +61,6 @@ public class @Controls : IInputActionCollection, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""ZQSD"",
-                    ""id"": ""59954d34-0f2b-4866-a070-54b175ba3bd5"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c6ec36e4-4c9d-4ab5-a95c-8302fbc5f876"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f412ee9c-dabc-429f-843a-379563d5d764"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""c8603a95-95eb-4325-a678-8e3c1d800976"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""85cea705-45f5-40df-ab5f-83d4102a1245"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""c88583ba-0c68-4020-af88-489a63855a37"",
                     ""path"": ""<Gamepad>/leftStick"",
@@ -130,17 +75,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""5adcb1e9-9a54-4218-9e2f-b56ffb8440ff"",
                     ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2f865097-5447-44f1-a349-4ebb053f4285"",
-                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -184,7 +118,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0e8eebd8-68a2-4155-b933-8911d2a6ed28"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -235,11 +169,27 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump2"",
+                    ""type"": ""Button"",
+                    ""id"": ""b9db9d35-2ee0-4d9c-b6fd-98c43730388c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Throw2"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac46df6e-eedd-4635-a745-3e5779a61077"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""arrows"",
+                    ""name"": ""ZQSD"",
                     ""id"": ""bef831bb-9f63-4acf-8393-2d6293d08204"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -252,7 +202,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""1b9b5d66-0a0f-44de-a6a5-772479beb291"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -263,7 +213,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""20be7f3d-ce65-4b84-8821-6f7922ece60a"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -274,7 +224,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""ed2a1753-7884-45d4-93d3-5cd008c351e0"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -285,7 +235,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""0a14d948-6cf4-4d80-b923-1cbce0113e20"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -301,6 +251,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4035cd8-077b-4b64-b7b4-d85fd92b1340"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""653e27c3-654a-4ab5-ae24-924cbbe7f0bc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -320,6 +292,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move2 = m_Player2.FindAction("Move2", throwIfNotFound: true);
         m_Player2_Aim2 = m_Player2.FindAction("Aim2", throwIfNotFound: true);
+        m_Player2_Jump2 = m_Player2.FindAction("Jump2", throwIfNotFound: true);
+        m_Player2_Throw2 = m_Player2.FindAction("Throw2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -436,12 +410,16 @@ public class @Controls : IInputActionCollection, IDisposable
     private IPlayer2Actions m_Player2ActionsCallbackInterface;
     private readonly InputAction m_Player2_Move2;
     private readonly InputAction m_Player2_Aim2;
+    private readonly InputAction m_Player2_Jump2;
+    private readonly InputAction m_Player2_Throw2;
     public struct Player2Actions
     {
         private @Controls m_Wrapper;
         public Player2Actions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move2 => m_Wrapper.m_Player2_Move2;
         public InputAction @Aim2 => m_Wrapper.m_Player2_Aim2;
+        public InputAction @Jump2 => m_Wrapper.m_Player2_Jump2;
+        public InputAction @Throw2 => m_Wrapper.m_Player2_Throw2;
         public InputActionMap Get() { return m_Wrapper.m_Player2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -457,6 +435,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Aim2.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnAim2;
                 @Aim2.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnAim2;
                 @Aim2.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnAim2;
+                @Jump2.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnJump2;
+                @Jump2.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnJump2;
+                @Jump2.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnJump2;
+                @Throw2.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnThrow2;
+                @Throw2.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnThrow2;
+                @Throw2.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnThrow2;
             }
             m_Wrapper.m_Player2ActionsCallbackInterface = instance;
             if (instance != null)
@@ -467,6 +451,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Aim2.started += instance.OnAim2;
                 @Aim2.performed += instance.OnAim2;
                 @Aim2.canceled += instance.OnAim2;
+                @Jump2.started += instance.OnJump2;
+                @Jump2.performed += instance.OnJump2;
+                @Jump2.canceled += instance.OnJump2;
+                @Throw2.started += instance.OnThrow2;
+                @Throw2.performed += instance.OnThrow2;
+                @Throw2.canceled += instance.OnThrow2;
             }
         }
     }
@@ -483,5 +473,7 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnMove2(InputAction.CallbackContext context);
         void OnAim2(InputAction.CallbackContext context);
+        void OnJump2(InputAction.CallbackContext context);
+        void OnThrow2(InputAction.CallbackContext context);
     }
 }

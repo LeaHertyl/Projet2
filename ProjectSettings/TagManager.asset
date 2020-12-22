@@ -11,6 +11,9 @@ TagManager:
   - InventoryP1
   - GameManager
   - Food
+  - PlayerWinner
+  - PlayerLoser
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,9 @@ public class PickUpItems : Interactable
     [SerializeField] private Items item; //permet de referencer les items crees dans le script Items issu de la classe ScriptableObjects
     
     private bool Grab; //on cree une varibale de type booleen
+    private bool Grab2;
     public bool isPicked; //on cree une varibale de type booleen, publique pour pouvoir y acceder depuis un autre script
+    public bool isPicked2;
 
     //INVENTORY VERSION
     /*private bool WasPickedUp;
@@ -19,6 +21,7 @@ public class PickUpItems : Interactable
     private void Start()
     {
         isPicked = false; //on attribue la valeur false au booleen au lancement du jeu
+        isPicked2 = false;
     }
 
 
@@ -33,6 +36,14 @@ public class PickUpItems : Interactable
         PickUp();
     }
 
+    public override void Interact2()
+    {
+        base.Interact2(); //on va executer ce qui est indique de base dans la fonction, dans le script Interactable
+
+        //en plus des actions de la fonction de base, les objets qui auront ce script exectuteront la fonction PickUp quand le player entrera dans la zone definie par le raduis du gizmos de l'objet a ramasser
+        PickUp2();
+    }
+
 
     public void PickUp()
     {
@@ -42,12 +53,12 @@ public class PickUpItems : Interactable
         var Player1 = GameObject.FindWithTag("Player1");
         var Player1Script = Player1.GetComponent<PlayerBehaviour>();
 
-        var Player1currentHealth = Player1Script.currentHealth; //on associe la valeur de la variable currentHealth du script PlayerBehaviour a la varibale Player1currentHealth
+        var Player1currentHealth = Player1Script.currentHealth1; //on associe la valeur de la variable currentHealth du script PlayerBehaviour a la varibale Player1currentHealth
         var Player1maxHealth = Player1Script.MaxHealth; //on associe la valeur de la variable MaxHealth du script PlayerBehaviour a la varibale Player1maxhealth
 
         Grab = Player1Script.grabSomething; //on associe la valeur de la variable grabsomething du script PlayerBehaviour a la varibale Grab
 
-        
+
         if (item.isFood)
         {
             //si la variable Grab est fausse -> si la variable grabsomething de PlayerBehaviour est fausse -> si le Player ne tient rien dans sa main
@@ -76,8 +87,48 @@ public class PickUpItems : Interactable
 
                 Destroy(gameObject);//on detruit le GameObject auquel ce script est associe
             }
+
         }
+
         }
+
+    public void PickUp2()
+    {
+        //on recupere le script PlayerBehaviour qui se trouve sur le GameObject ayant le tag Player 2
+        var Player2 = GameObject.FindWithTag("Player2");
+        var Player2Script = Player2.GetComponent<Player2Behaviour>();
+
+        var Player2currentHealth = Player2Script.currentHealth2; //on associe la valeur de la variable currentHealth du script PlayerBehaviour a la varibale Player1currentHealth
+        var Player2maxHealth = Player2Script.MaxHealth; //on associe la valeur de la variable MaxHealth du script PlayerBehaviour a la varibale Player1maxhealth
+
+        Grab2 = Player2Script.grabSomething; //on associe la valeur de la variable grabsomething du script PlayerBehaviour a la varibale Grab
+
+        if(item.isFood)
+        {
+            if (Grab2 == false)
+            {
+                Player2Script.grabSomething = true;
+                Player2Script.InstantiateFood();
+
+                isPicked2 = true;
+
+                Destroy(gameObject);
+            }
+        }
+        else if (item.isFruit)
+        {
+            //dans ce cas de figure, ca va soigner les deux joueur en meme temps si leur vie est != du max
+            if (Player2currentHealth != Player2maxHealth)
+            {
+                Player2Script.Hill(20);
+
+                isPicked2 = true;
+
+                Destroy(gameObject);
+            }
+        }
+
+    }
 
 
         //INVENTORY VERSION
@@ -91,7 +142,7 @@ public class PickUpItems : Interactable
 
 
         //NO INVENTORY VERSION -> refaire le if mais avec une autre condition
-    }
+    
 
     //INVENTORY VERSION
     /*public override void Thrown()

@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2005908096953236668}
   - component: {fileID: 2005908096953236671}
-  - component: {fileID: 2005908096953236669}
+  - component: {fileID: -470161441684040288}
   m_Layer: 0
   m_Name: Player1NoAnim
   m_TagString: Player1
@@ -228,7 +228,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2005908096953236669
+--- !u!114 &-470161441684040288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,23 +240,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c2f638e00355d4d9d4f03e1a7be702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 15
   Gravity: -40
   TurnSpeed: 300
   JumpForce: 3
-  PlayerCamera: {fileID: 0}
+  Player1Camera: {fileID: 2340929766107594153, guid: 8102ad2fa15d07449b59b144e7552b59,
+    type: 3}
   GroundMask:
     serializedVersion: 2
     m_Bits: 256
-  healthBarAffiche: {fileID: 0}
-  healhBarPlayer: {fileID: 5722929740530374931}
+  healthBar1Affiche: {fileID: 0}
+  healhBar1Player: {fileID: 0}
   MaxHealth: 100
-  currentHealth: 0
+  currentHealth1: 0
   XButton: {fileID: 8798973516977685836, guid: 3c3f0c066a3eca646a30c7ed1ebd8c2e, type: 3}
-  PlayerFeet: {fileID: 2005908096894074550}
+  Player1Feet: {fileID: 0}
   prefabToInstantiate: {fileID: 2770847982013758875, guid: 3ac3abb01c7e78447a8974a3a782e91d,
     type: 3}
-  handPosition: {fileID: 2005908096880213225}
+  hand1Position: {fileID: 0}
   isPicking: 0
   isThrowing: 0
   grabSomething: 0
@@ -575,15 +576,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2005908096357250376}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5722929740530374931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6106182416238439515, guid: 404d878f4c1aa384a9ab57b3131786f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 2005908096357250376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2650ecbe95916d428f7d5ae338844e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
