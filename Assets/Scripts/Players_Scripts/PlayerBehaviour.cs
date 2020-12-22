@@ -41,6 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 PlayerDirection1;
     private Vector3 DirectionToMove1;
     private Vector3 MoveDirection1;
+    private Vector3 JumpVector;
 
 
     /// <summary>
@@ -200,7 +201,9 @@ public class PlayerBehaviour : MonoBehaviour
         //vitesse = racine carre de (hauteur souhaitee x -2 x gravite)
         //la fonction Mathf.Sqrt() calcul pour nous la racine carree
         var heightSpeed = Mathf.Sqrt(JumpForce * -2 * Gravity); //on calcule la hauteur du saut du Player en fonction de la force de son saut et de la gravite qui lui est appliquee
-        var JumpVector = new Vector3(0, heightSpeed, 0); //on applique la valeur calculee ci-dessus au parametre Y d'un vector3 -> le saut et la gravite n'agissent que sur l'axe Y du Player
+        JumpVector = new Vector3(0, heightSpeed, 0); //on applique la valeur calculee ci-dessus au parametre Y d'un vector3 -> le saut et la gravite n'agissent que sur l'axe Y du Player
+        Debug.Log(JumpVector);
+
         return JumpVector; //on retourne le Vector3 calcule ci-dessus pour l'ajouter a l'additon des vector3 permettant de calculer le mouvement du Player
     }
 

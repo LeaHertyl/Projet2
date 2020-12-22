@@ -7,6 +7,7 @@ public class Object_Throw : MonoBehaviour
     [SerializeField] private float throwForce;
     [SerializeField] private float radius;
     [SerializeField] private GameObject ExplosionEffect;
+    //[SerializeField] private AudioClip Explosion;
 
     private bool isthrowing; //on cree un booleen
     private bool isthrowing2;
@@ -84,6 +85,7 @@ public class Object_Throw : MonoBehaviour
     {
         //on stock l'objet qu'on va instancier dans une variable pour pouvoir l'appeler et y faire reference ailleurs
         ExplosionToDestroy = Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
+        
     }
 
     private void OnDrawGizmosSelected()

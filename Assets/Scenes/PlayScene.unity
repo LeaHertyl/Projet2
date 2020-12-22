@@ -17790,6 +17790,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
+      propertyPath: JumpForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
       propertyPath: Player1Feet
       value: 
       objectReference: {fileID: 1479717436}
@@ -17846,7 +17851,7 @@ PrefabInstance:
     - target: {fileID: 2005908096953236668, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.03
+      value: 4.95
       objectReference: {fileID: 0}
     - target: {fileID: 2005908096953236668, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
@@ -18104,7 +18109,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1479717433}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1496941069
+--- !u!95 &1496941072
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -19865,7 +19870,7 @@ PrefabInstance:
     - target: {fileID: 2340929766107594158, guid: 8102ad2fa15d07449b59b144e7552b59,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5225005
+      value: 7.4425
       objectReference: {fileID: 0}
     - target: {fileID: 2340929766107594158, guid: 8102ad2fa15d07449b59b144e7552b59,
         type: 3}
@@ -22195,7 +22200,7 @@ PrefabInstance:
     - target: {fileID: 1617817803507711559, guid: 1ec46a89207f11840af8e4a0b9a11a83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5225005
+      value: 7.4425
       objectReference: {fileID: 0}
     - target: {fileID: 1617817803507711559, guid: 1ec46a89207f11840af8e4a0b9a11a83,
         type: 3}

@@ -71,17 +71,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4cc89b84-a464-4744-baff-929992939b4f",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f90e37fb-c195-4f88-bce0-6c599ff1cdf4",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -104,30 +93,8 @@
                 },
                 {
                     "name": "",
-                    "id": "0e8eebd8-68a2-4155-b933-8911d2a6ed28",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6c29b228-3ca0-442b-8244-f3d801bbc8c8",
                     "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9fd18c2a-8eed-4354-bdf5-3d247b71acc4",
-                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
