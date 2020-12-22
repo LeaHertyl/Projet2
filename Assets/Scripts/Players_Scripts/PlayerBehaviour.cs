@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Controls controls;
     private CharacterController controller;
+    private Animator myAnim;
 
     private Vector2 direction;
     private bool isjumping;
@@ -69,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         //on recupere le composant characterController de l'objet auquel ce script est associe
         controller = GetComponent<CharacterController>();
+        myAnim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -87,6 +89,9 @@ public class PlayerBehaviour : MonoBehaviour
         //on donne pour valeur au Vector3 l'addition des trois vector3 correspondant a ce que les fonctions ApplyMove(), ApplyJump() et ApplyGravity retournent
         DirectionToMove1 = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove1 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
+
+        var IsRunning = PlayerDirection1.x != 0 || PlayerDirection1.z != 0;
+        myAnim.SetBool("isRunning1", IsRunning);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)

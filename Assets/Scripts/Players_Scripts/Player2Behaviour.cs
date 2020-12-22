@@ -28,6 +28,7 @@ public class Player2Behaviour : MonoBehaviour
 
     private Controls controls;
     private CharacterController controller;
+    private Animator myAnimator;
 
     private Vector2 direction;
     private bool isjumping;
@@ -65,6 +66,7 @@ public class Player2Behaviour : MonoBehaviour
 
         //on recupere le composant characterController de l'objet auquel ce script est associe
         controller = GetComponent<CharacterController>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -83,12 +85,16 @@ public class Player2Behaviour : MonoBehaviour
         //on donne pour valeur au Vector3 l'addition des trois vector3 correspondant a ce que les fonctions ApplyMove(), ApplyJump() et ApplyGravity retournent
         DirectionToMove2 = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove2 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
+
+        var IsRunning = PlayerDirection2.x != 0 || PlayerDirection2.z != 0 ;
+        myAnimator.SetBool("isRunning2", IsRunning);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
     {
         //quand l'input est enclenche, on donne au vector2 direction la valeur d'obj
         direction = obj.ReadValue<Vector2>();
+        Debug.Log(direction);
         //on transforme le Vector2 ci-dessus en Vector3 en passant 0 en paramètre y car on ne veut pas que le Player bouge sur cet axe
         PlayerDirection2 = new Vector3(direction.x, 0, direction.y); //placer cette ligne dans la fonction a la place de l'Update est plus opti
     }
