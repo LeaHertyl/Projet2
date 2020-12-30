@@ -7,16 +7,13 @@ public class Object_Throw : MonoBehaviour
     [SerializeField] private float throwForce;
     [SerializeField] private float radius;
     [SerializeField] private GameObject ExplosionEffect;
-    //[SerializeField] private AudioClip Explosion;
+    [SerializeField] private AudioSource GroundExplosion;
 
     private bool isthrowing; //on cree un booleen
     private bool isthrowing2;
     private float distance1;
     private float distance2;
     private Rigidbody myRB; //on cree une variable de type Rigibody
-    private GameObject ExplosionToDestroy;
-
-    //private Transform transform;
 
     // Start is called before the first frame update
     void Start()
@@ -65,11 +62,6 @@ public class Object_Throw : MonoBehaviour
             myRB.AddForce(Camera2Transform.forward * throwForce);
         }
 
-        //si la position en y de l'objet est inferieure ou egale a -20
-        if(transform.position.y <= -4)
-        {
-            Destroy(ExplosionToDestroy); //on detruit le gameObject correspondant aux particules d'explosion pour qu'elles se détruisent en même temps que l'objet
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,7 +80,7 @@ public class Object_Throw : MonoBehaviour
     private void Explod()
     {
         //on stock l'objet qu'on va instancier dans une variable pour pouvoir l'appeler et y faire reference ailleurs
-        ExplosionToDestroy = Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
+        Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
         Destroy(gameObject);
     }
 
