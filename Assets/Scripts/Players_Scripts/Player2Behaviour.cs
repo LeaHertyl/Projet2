@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Player2Behaviour : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class Player2Behaviour : MonoBehaviour
     [SerializeField] private float Gravity;
     [SerializeField] private float TurnSpeed;
     [SerializeField] private float JumpForce;
+    [SerializeField] private float IntensityCamShake;
+    [SerializeField] private float TimerCamShake;
 
     [SerializeField] private Camera Player2Camera;
+    [SerializeField] private CinemachineVirtualCamera CinemachineCam2;
 
     [SerializeField] LayerMask GroundMask;
 
@@ -254,6 +258,9 @@ public class Player2Behaviour : MonoBehaviour
         if (other.tag == "Food")
         {
             TakeDamage(20); //on lance la fonction TakeDamage() en indiquant que le Player perd 20 points de vie
+
+            var CinemachineScript = CinemachineCam2.GetComponent<CinemachineShake>();
+            CinemachineScript.ShakeCamera(IntensityCamShake, TimerCamShake);
         }
     }
 }

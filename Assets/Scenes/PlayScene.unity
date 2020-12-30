@@ -2279,6 +2279,21 @@ PrefabInstance:
       objectReference: {fileID: 1096030108}
     - target: {fileID: 6911863276148101037, guid: 15847bfa2db8bb64d897528c29302e3b,
         type: 3}
+      propertyPath: TimerCamShake
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911863276148101037, guid: 15847bfa2db8bb64d897528c29302e3b,
+        type: 3}
+      propertyPath: CinemachineCam2
+      value: 
+      objectReference: {fileID: 969381563}
+    - target: {fileID: 6911863276148101037, guid: 15847bfa2db8bb64d897528c29302e3b,
+        type: 3}
+      propertyPath: IntensityCamShake
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6911863276148101037, guid: 15847bfa2db8bb64d897528c29302e3b,
+        type: 3}
       propertyPath: healthBar2Affiche
       value: 
       objectReference: {fileID: 969389003}
@@ -6937,6 +6952,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d9283626514874baf077ef3ff4625f, type: 3}
+--- !u!1 &534699981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1617817803507711561, guid: 1ec46a89207f11840af8e4a0b9a11a83,
+    type: 3}
+  m_PrefabInstance: {fileID: 1891655029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &534699982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534699981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b097fa16dbbac2647ab212b800586e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &534699983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1617817803507711560, guid: 1ec46a89207f11840af8e4a0b9a11a83,
+    type: 3}
+  m_PrefabInstance: {fileID: 1891655029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534699981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &545145604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7561,6 +7606,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 577629412}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &583392284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1617817804843709234, guid: 1ec46a89207f11840af8e4a0b9a11a83,
+    type: 3}
+  m_PrefabInstance: {fileID: 1891655029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &583392289
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583392284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 3
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &586576409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4395389346415762532, guid: a4d9283626514874baf077ef3ff4625f,
@@ -12215,6 +12283,30 @@ MonoBehaviour:
   PlayerIndex: -1
   XYAxis: {fileID: -7901356187599894586, guid: 60c7f6bccfe57564daf6f9e05e124ed3, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &969381561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969381559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b097fa16dbbac2647ab212b800586e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &969381563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4367651577841551998, guid: 45162ea7b9eba6845ab2c49ab6f12d9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1610493816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969381559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &969389001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18040,14 +18132,29 @@ PrefabInstance:
       objectReference: {fileID: 2074954465}
     - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
+      propertyPath: TimerCamShake
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
       propertyPath: hand1Position
       value: 
       objectReference: {fileID: 1479717437}
     - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
+      propertyPath: CinemachineCam1
+      value: 
+      objectReference: {fileID: 534699983}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
       propertyPath: healhBar1Player
       value: 
       objectReference: {fileID: 1479717435}
+    - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: IntensityCamShake
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -470161441684040288, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
       propertyPath: healthBar1Affiche
@@ -18058,6 +18165,11 @@ PrefabInstance:
       propertyPath: OtherPlayercamera
       value: 
       objectReference: {fileID: 1096030107}
+    - target: {fileID: 2005908096894074550, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.96
+      objectReference: {fileID: 0}
     - target: {fileID: 2005908096953236668, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
       propertyPath: m_RootOrder
@@ -18091,7 +18203,7 @@ PrefabInstance:
     - target: {fileID: 2005908096953236668, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.7
+      value: 60.16
       objectReference: {fileID: 0}
     - target: {fileID: 2005908096953236668, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
@@ -19781,6 +19893,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CamPlayer2
       objectReference: {fileID: 0}
+    - target: {fileID: 4367651577841551937, guid: 45162ea7b9eba6845ab2c49ab6f12d9a,
+        type: 3}
+      propertyPath: m_TagString
+      value: CinemachineCam2
+      objectReference: {fileID: 0}
     - target: {fileID: 4367651577841551998, guid: 45162ea7b9eba6845ab2c49ab6f12d9a,
         type: 3}
       propertyPath: m_Follow
@@ -19917,6 +20034,23 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_ApplyBeforeBody: 0
+--- !u!114 &1610493822
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610493817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 3
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &1615070707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20147,7 +20281,7 @@ PrefabInstance:
     - target: {fileID: 2340929766107594158, guid: 8102ad2fa15d07449b59b144e7552b59,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.800003
+      value: 60.260002
       objectReference: {fileID: 0}
     - target: {fileID: 2340929766107594158, guid: 8102ad2fa15d07449b59b144e7552b59,
         type: 3}
@@ -22505,7 +22639,7 @@ PrefabInstance:
     - target: {fileID: 1617817803507711559, guid: 1ec46a89207f11840af8e4a0b9a11a83,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.800003
+      value: 60.260002
       objectReference: {fileID: 0}
     - target: {fileID: 1617817803507711559, guid: 1ec46a89207f11840af8e4a0b9a11a83,
         type: 3}
@@ -22551,6 +22685,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CamPlayer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617817803507711561, guid: 1ec46a89207f11840af8e4a0b9a11a83,
+        type: 3}
+      propertyPath: m_TagString
+      value: CinemachineCam1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec46a89207f11840af8e4a0b9a11a83, type: 3}

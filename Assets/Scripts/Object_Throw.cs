@@ -68,7 +68,6 @@ public class Object_Throw : MonoBehaviour
         //si la position en y de l'objet est inferieure ou egale a -20
         if(transform.position.y <= -4)
         {
-            Destroy(gameObject); //on detruit le gameObject associe a ce script -> permet de supprimer les objets quand ils ont ete lance et qu'on ne les voit plus dans la scene et qu'ils ne tombent pas a l'infini
             Destroy(ExplosionToDestroy); //on detruit le gameObject correspondant aux particules d'explosion pour qu'elles se détruisent en même temps que l'objet
         }
     }
@@ -79,13 +78,18 @@ public class Object_Throw : MonoBehaviour
         {
             Explod(); //on appelle la fonction Explod() quand l'objet en trigger un autre
         }
+
+        if(other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2")
+        {
+            Explod();
+        }
     }
 
     private void Explod()
     {
         //on stock l'objet qu'on va instancier dans une variable pour pouvoir l'appeler et y faire reference ailleurs
         ExplosionToDestroy = Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
-        
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()
