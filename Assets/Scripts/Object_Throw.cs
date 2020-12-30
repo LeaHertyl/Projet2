@@ -7,7 +7,8 @@ public class Object_Throw : MonoBehaviour
     [SerializeField] private float throwForce;
     [SerializeField] private float radius;
     [SerializeField] private GameObject ExplosionEffect;
-    [SerializeField] private AudioSource GroundExplosion;
+    [SerializeField] private GameObject GroundExplosion;
+    [SerializeField] private GameObject PlayerExplosion;
 
     private bool isthrowing; //on cree un booleen
     private bool isthrowing2;
@@ -68,11 +69,13 @@ public class Object_Throw : MonoBehaviour
     {
         if(other.gameObject.tag == "Ground")
         {
+            Instantiate(GroundExplosion,transform.position, transform.rotation) ;
             Explod(); //on appelle la fonction Explod() quand l'objet en trigger un autre
         }
 
         if(other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2")
         {
+            Instantiate(PlayerExplosion, transform.position, transform.rotation);
             Explod();
         }
     }

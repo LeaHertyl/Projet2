@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7149548681857662462}
   - component: {fileID: 5025487648751286831}
   m_Layer: 11
-  m_Name: Cube
+  m_Name: CubeToThrow
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,4 +128,8 @@ MonoBehaviour:
   throwForce: 350
   radius: 1.09
   ExplosionEffect: {fileID: 3264086961841567011, guid: 50649f22120ce424aa979d10d269e0be,
+    type: 3}
+  GroundExplosion: {fileID: 6330933049344159778, guid: b0ee706476b36d8489f287b2293d62eb,
+    type: 3}
+  PlayerExplosion: {fileID: 3994877030090177621, guid: a550825afe094784491d1472f2d9064f,
     type: 3}
