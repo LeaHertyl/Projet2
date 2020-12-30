@@ -84,6 +84,9 @@ public class Player2Behaviour : MonoBehaviour
     {
         //on donne pour valeur au Vector3 l'addition des trois vector3 correspondant a ce que les fonctions ApplyMove(), ApplyJump() et ApplyGravity retournent
         DirectionToMove2 = ApplyMove() + ApplyJump() + ApplyGravity();
+
+        Debug.Log(DirectionToMove2);
+
         controller.Move(DirectionToMove2 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
 
         var IsRunning = PlayerDirection2.x != 0 || PlayerDirection2.z != 0 ;
@@ -189,16 +192,22 @@ public class Player2Behaviour : MonoBehaviour
     private Vector3 ApplyJump()
     {
         //si l'input de saut n'est pas enclenche ou que le Player bouge sur l'axy y
-        if (!isjumping || DirectionToMove2.y != 0)
+        /*if (!isjumping || DirectionToMove2.y != 0)
         {
             return Vector3.zero; //on retourne un vector3 nul -> n'aura aucune incidence sur l'addition des vector3 qui permet de calculer le mouvement du Player
-        }
+        }*/
 
         //vitesse = racine carre de (hauteur souhaitee x -2 x gravite)
         //la fonction Mathf.Sqrt() calcul pour nous la racine carree
-        var heightSpeed = Mathf.Sqrt(JumpForce * -2 * Gravity); //on calcule la hauteur du saut du Player en fonction de la force de son saut et de la gravite qui lui est appliquee
-        var JumpVector = new Vector3(0, heightSpeed, 0); //on applique la valeur calculee ci-dessus au parametre Y d'un vector3 -> le saut et la gravite n'agissent que sur l'axe Y du Player
-        return JumpVector; //on retourne le Vector3 calcule ci-dessus pour l'ajouter a l'additon des vector3 permettant de calculer le mouvement du Player
+        if(isjumping && DirectionToMove2.y == 0)
+        {
+            var heightSpeed = Mathf.Sqrt(JumpForce * -2 * Gravity); //on calcule la hauteur du saut du Player en fonction de la force de son saut et de la gravite qui lui est appliquee
+            var JumpVector = new Vector3(0, heightSpeed, 0); //on applique la valeur calculee ci-dessus au parametre Y d'un vector3 -> le saut et la gravite n'agissent que sur l'axe Y du Player
+            return JumpVector; //on retourne le Vector3 calcule ci-dessus pour l'ajouter a l'additon des vector3 permettant de calculer le mouvement du Player
+        }
+
+        return Vector3.zero;
+
     }
 
     /// <summary>
