@@ -93,6 +93,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         var IsRunning = PlayerDirection1.x != 0 || PlayerDirection1.z != 0;
         myAnim.SetBool("isRunning1", IsRunning);
+
+        var IsJumping = DirectionToMove1.y != 0;
+        myAnim.SetBool("isJumping1", IsJumping);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)

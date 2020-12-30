@@ -84,13 +84,13 @@ public class Player2Behaviour : MonoBehaviour
     {
         //on donne pour valeur au Vector3 l'addition des trois vector3 correspondant a ce que les fonctions ApplyMove(), ApplyJump() et ApplyGravity retournent
         DirectionToMove2 = ApplyMove() + ApplyJump() + ApplyGravity();
-
-        Debug.Log(DirectionToMove2);
-
         controller.Move(DirectionToMove2 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
 
         var IsRunning = PlayerDirection2.x != 0 || PlayerDirection2.z != 0 ;
         myAnimator.SetBool("isRunning2", IsRunning);
+
+        var IsJumping = DirectionToMove2.y != 0;
+        myAnimator.SetBool("isJumping2", IsJumping);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
