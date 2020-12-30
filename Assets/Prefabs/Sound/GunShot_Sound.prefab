@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6330933049344159772}
   - component: {fileID: 6330933049344159773}
+  - component: {fileID: 4873845887315091254}
   m_Layer: 0
   m_Name: GunShot_Sound
   m_TagString: Untagged
@@ -127,3 +128,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4873845887315091254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6330933049344159778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334d2773fa3be5e42a866f242594f473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 1
