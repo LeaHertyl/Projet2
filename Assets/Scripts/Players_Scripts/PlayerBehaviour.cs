@@ -73,9 +73,8 @@ public class PlayerBehaviour : MonoBehaviour
         controls.Player.Throw.performed += OnThrowPerformed;
         controls.Player.Throw.canceled += OnThrowCanceled;
 
-        //on recupere le composant characterController de l'objet auquel ce script est associe
-        controller = GetComponent<CharacterController>();
-        myAnim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>(); //on recupere le composant characterController de l'objet auquel ce script est associe
+        myAnim = GetComponent<Animator>(); //on recupere le composant Animator de l'objet auquel ce script est associe
     }
 
     // Start is called before the first frame update
@@ -95,9 +94,11 @@ public class PlayerBehaviour : MonoBehaviour
         DirectionToMove1 = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove1 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
 
+        //on indique que si PlayerDirection1.x != 0 ou si PlayerDirection1.z != 0, on lance l'animation de course
         var IsRunning = PlayerDirection1.x != 0 || PlayerDirection1.z != 0;
         myAnim.SetBool("isRunning1", IsRunning);
 
+        //on indique que si DirectionToMove1.y != 0, on lance l'animation de saut
         var IsJumping = DirectionToMove1.y != 0;
         myAnim.SetBool("isJumping1", IsJumping);
     }
@@ -242,16 +243,6 @@ public class PlayerBehaviour : MonoBehaviour
         Instantiate(prefabToInstantiate, hand1Position); //quand la fonction est appelee, on instancie le prefab reference dans l'inspector a la position du gameObject reference en tant qu'handPosition
     }
 
-    public void InstantiateXButton()
-    {
-        Instantiate(XButton);
-    }
-
-    public void DestroyXButton()
-    {
-        Destroy(XButton);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         //si le Player est traverse par un autre objet qui a le tag Food
@@ -259,8 +250,8 @@ public class PlayerBehaviour : MonoBehaviour
         {
             TakeDamage(20); //on lance la fonction TakeDamage() en indiquant que le Player perd 20 points de vie
 
-            var CinemachineScript = CinemachineCam1.GetComponent<CinemachineShake>();
-            CinemachineScript.ShakeCamera(IntensityCamShake, TimerCamShake);
+            var CinemachineScript = CinemachineCam1.GetComponent<CinemachineShake>(); //on recupere le composant CinemachineShake de la Virtual Camera referencee
+            CinemachineScript.ShakeCamera(IntensityCamShake, TimerCamShake); //on applique la fonction ShakeCamera avec comme parametres deux variables float serialisees
         }
     }
 

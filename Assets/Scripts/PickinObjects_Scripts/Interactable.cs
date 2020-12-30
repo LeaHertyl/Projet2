@@ -65,13 +65,13 @@ public class Interactable : MonoBehaviour
     public virtual void Interact()
     {
         //Indique ce qu'il va se passer une fois que le joueur a interragi avec l'objet
-        //Debug.Log("interact with " + transform.name);
+        //Le contenu de la fonction est override dans un autre script
     }
 
     public virtual void Interact2()
     {
         //Indique ce qu'il va se passer une fois que le joueur a interragi avec l'objet
-        //Debug.Log("interact with " + transform.name);
+        //Le contenu de la fonction est override dans un autre script
     }
 
 

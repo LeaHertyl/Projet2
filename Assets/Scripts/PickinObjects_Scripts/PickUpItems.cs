@@ -90,7 +90,7 @@ public class PickUpItems : Interactable
 
         }
 
-        }
+    }
 
     public void PickUp2()
     {

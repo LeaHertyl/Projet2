@@ -67,16 +67,18 @@ public class Object_Throw : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //si l'objet avec lequel l'objet auquel est associe ce script trigger a le tag "Ground"
         if(other.gameObject.tag == "Ground")
         {
-            Instantiate(GroundExplosion,transform.position, transform.rotation) ;
-            Explod(); //on appelle la fonction Explod() quand l'objet en trigger un autre
+            Instantiate(GroundExplosion,transform.position, transform.rotation); //on instancie le GameObject contenant l'audio source correspondant
+            Explod(); //on lance la fonction Explod()
         }
 
-        if(other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2")
+        //si l'objet avec lequel l'objet auquel est associe ce script trigger a le tag "Player1" ou le tag "Player2"
+        if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2")
         {
-            Instantiate(PlayerExplosion, transform.position, transform.rotation);
-            Explod();
+            Instantiate(PlayerExplosion, transform.position, transform.rotation); //on instancie le GameObject contenant l'audio source correspondant
+            Explod(); //on lance la fonction Explod()
         }
     }
 
@@ -84,9 +86,12 @@ public class Object_Throw : MonoBehaviour
     {
         //on stock l'objet qu'on va instancier dans une variable pour pouvoir l'appeler et y faire reference ailleurs
         Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
-        Destroy(gameObject);
+        Destroy(gameObject); //on detruit le GameOject
     }
 
+    /// <summary>
+    /// fonction pour afficher les gizmos et mieux visualiser la zone d'interaction de l'objet
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

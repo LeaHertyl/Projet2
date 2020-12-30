@@ -31,15 +31,18 @@ public class CinemachineShake : MonoBehaviour
 
     private void Update()
     {
+        //on indique ce qui se passe si la valeur de la variable ShakeTime est superieure a 0
         if(ShakeTimer > 0)
         {
-            ShakeTimer -= Time.deltaTime;
+            ShakeTimer -= Time.deltaTime; //on fait diminuer cette valeur
 
+            //si la valeur de la variable ShakeTimer devient inferieure ou egale a 0
             if (ShakeTimer <= 0f)
             {
+                //on reucpere une nouvelle fois le composant CinemachineBasicMultiChannelPerlin de la variable CinemachineNoise
                 CinemachineBasicMultiChannelPerlin CinemachineNoise = VirtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-                CinemachineNoise.m_AmplitudeGain = 0f;
+                CinemachineNoise.m_AmplitudeGain = 0f; //On passe la valeur de ce composant a 0
             }
         }
     }
