@@ -24,7 +24,6 @@ public class PlayerBehaviour : MonoBehaviour
     public int MaxHealth;
     public int currentHealth1;
 
-    [SerializeField] private Canvas XButton;
     [SerializeField] private Transform Player1Feet;
 
     [SerializeField] private GameObject prefabToInstantiate;
@@ -101,6 +100,8 @@ public class PlayerBehaviour : MonoBehaviour
         //on indique que si DirectionToMove1.y != 0, on lance l'animation de saut
         var IsJumping = DirectionToMove1.y != 0;
         myAnim.SetBool("isJumping1", IsJumping);
+
+        Debug.Log(grabSomething);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)

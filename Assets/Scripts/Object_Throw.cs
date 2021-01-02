@@ -16,10 +16,13 @@ public class Object_Throw : MonoBehaviour
     private float distance2;
     private Rigidbody myRB; //on cree une variable de type Rigibody
 
+    public bool hasExploded;
+
     // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody>(); //on recupere le composant Rigidbody de l'objet auquel ce script est associe
+        hasExploded = false;
     }
 
     // Update is called once per frame
@@ -84,6 +87,26 @@ public class Object_Throw : MonoBehaviour
 
     private void Explod()
     {
+        var Player1 = GameObject.FindWithTag("Player1");
+        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
+
+        var grab1 = Player1Script.grabSomething;
+
+        var Player2 = GameObject.FindWithTag("Player2");
+        var Player2Script = Player2.GetComponent<Player2Behaviour>();
+
+        var grab2 = Player2Script.grabSomething;
+
+        if (grab1 == true)
+        {
+            Player1Script.grabSomething = false;
+        }
+
+        if(grab2 == true)
+        {
+            Player2Script.grabSomething = false;
+        }
+
         //on stock l'objet qu'on va instancier dans une variable pour pouvoir l'appeler et y faire reference ailleurs
         Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
         Destroy(gameObject); //on detruit le GameOject

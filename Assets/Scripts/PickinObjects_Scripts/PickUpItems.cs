@@ -56,22 +56,16 @@ public class PickUpItems : Interactable
         var Player1currentHealth = Player1Script.currentHealth1; //on associe la valeur de la variable currentHealth du script PlayerBehaviour a la varibale Player1currentHealth
         var Player1maxHealth = Player1Script.MaxHealth; //on associe la valeur de la variable MaxHealth du script PlayerBehaviour a la varibale Player1maxhealth
 
-        Grab = Player1Script.grabSomething; //on associe la valeur de la variable grabsomething du script PlayerBehaviour a la varibale Grab
-
-
         if (item.isFood)
         {
-            //si la variable Grab est fausse -> si la variable grabsomething de PlayerBehaviour est fausse -> si le Player ne tient rien dans sa main
-            if (Grab == false)
-            {
-                //isGrabed = true;
-                Player1Script.grabSomething = true; //on passe la variable grabsomething du script PlayerBehaviour a true -> indique qu'on tient quelque chose et va permettre de le lancer
-                Player1Script.InstantiateFood(); //on lance la fonction InstantiateFood du script PlayerBehaviour -> fait apparaitre la nourriture a lancer dans la main du Player
+            //les lignes du dessus s'effetuent tout le temps quand la fonction est lancee mais la fonction n'est lancee que quand le Player n'a rien dans la main
+            Player1Script.grabSomething = true; //on passe la variable grabsomething du script PlayerBehaviour a true -> indique qu'on tient quelque chose et va permettre de le lancer
+            Player1Script.InstantiateFood(); //on lance la fonction InstantiateFood du script PlayerBehaviour -> fait apparaitre la nourriture a lancer dans la main du Player
 
-                isPicked = true; //on passe le booleen a true -> va indiquer au point de spwan qu'il est vide
+            isPicked = true; //on passe le booleen a true -> va indiquer au point de spwan qu'il est vide
 
-                Destroy(gameObject); //on detruit le GameObject auquel ce script est associe
-            }
+            Destroy(gameObject); //on detruit le GameObject auquel ce script est associe
+
 
         }
         //si le booleen True de l'item avec lequel on veut interagir est isFruit
@@ -101,19 +95,16 @@ public class PickUpItems : Interactable
         var Player2currentHealth = Player2Script.currentHealth2; //on associe la valeur de la variable currentHealth du script PlayerBehaviour a la varibale Player1currentHealth
         var Player2maxHealth = Player2Script.MaxHealth; //on associe la valeur de la variable MaxHealth du script PlayerBehaviour a la varibale Player1maxhealth
 
-        Grab2 = Player2Script.grabSomething; //on associe la valeur de la variable grabsomething du script PlayerBehaviour a la varibale Grab
-
         if(item.isFood)
         {
-            if (Grab2 == false)
-            {
-                Player2Script.grabSomething = true;
-                Player2Script.InstantiateFood();
 
-                isPicked2 = true;
+            Player2Script.grabSomething = true;
+            Player2Script.InstantiateFood();
 
-                Destroy(gameObject);
-            }
+            isPicked2 = true;
+
+            Destroy(gameObject);
+            
         }
         else if (item.isFruit)
         {
@@ -139,9 +130,6 @@ public class PickUpItems : Interactable
             Destroy(gameObject);
             Debug.Log("objet detruit");
         }*/
-
-
-        //NO INVENTORY VERSION -> refaire le if mais avec une autre condition
     
 
     //INVENTORY VERSION

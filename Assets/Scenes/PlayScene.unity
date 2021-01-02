@@ -2172,6 +2172,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.06
       objectReference: {fileID: 0}
+    - target: {fileID: 4917286265534690092, guid: 15847bfa2db8bb64d897528c29302e3b,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4917286265534690093, guid: 15847bfa2db8bb64d897528c29302e3b,
         type: 3}
       propertyPath: m_Name
@@ -18259,6 +18264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005908096953236671, guid: 24935f1950af29b428d832a59d5f213f,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2005908097551600534, guid: 24935f1950af29b428d832a59d5f213f,
         type: 3}
