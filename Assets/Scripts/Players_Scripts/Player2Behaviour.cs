@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Player2Behaviour : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class Player2Behaviour : MonoBehaviour
     [SerializeField] private float Gravity;
     [SerializeField] private float TurnSpeed;
     [SerializeField] private float JumpForce;
+    [SerializeField] private float IntensityCamShake;
+    [SerializeField] private float TimerCamShake;
 
     [SerializeField] private Camera Player2Camera;
+    [SerializeField] private CinemachineVirtualCamera CinemachineCam2;
 
     [SerializeField] LayerMask GroundMask;
 
@@ -28,6 +32,7 @@ public class Player2Behaviour : MonoBehaviour
 
     private Controls controls;
     private CharacterController controller;
+    private Animator myAnimator;
 
     private Vector2 direction;
     private bool isjumping;
@@ -63,8 +68,8 @@ public class Player2Behaviour : MonoBehaviour
         controls.Player2.Throw2.performed += OnThrowPerformed;
         controls.Player2.Throw2.canceled += OnThrowCanceled;
 
-        //on recupere le composant characterController de l'objet auquel ce script est associe
-        controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>(); //on recupere le composant characterController de l'objet auquel ce script est associe
+        myAnimator = GetComponent<Animator>(); //on recupere le composant Animator de l'objet auquel ce script est associe
     }
 
     // Start is called before the first frame update
@@ -83,12 +88,21 @@ public class Player2Behaviour : MonoBehaviour
         //on donne pour valeur au Vector3 l'addition des trois vector3 correspondant a ce que les fonctions ApplyMove(), ApplyJump() et ApplyGravity retournent
         DirectionToMove2 = ApplyMove() + ApplyJump() + ApplyGravity();
         controller.Move(DirectionToMove2 * Time.deltaTime); //on applique la fonction Move au character controller de l'objet auquel est associe ce script en utilisant le Vector3 calcule ci-dessus
+
+        //on indique que si PlayerDirection2.x != 0 ou si PlayerDirection2.z != 0, on lance l'animation de course
+        var IsRunning = PlayerDirection2.x != 0 || PlayerDirection2.z != 0 ;
+        myAnimator.SetBool("isRunning2", IsRunning);
+
+        //on indique que si DirectionToMove2.y != 0 on lance l'animation de saut
+        var IsJumping = DirectionToMove2.y != 0;
+        myAnimator.SetBool("isJumping2", IsJumping);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext obj)
     {
         //quand l'input est enclenche, on donne au vector2 direction la valeur d'obj
         direction = obj.ReadValue<Vector2>();
+        Debug.Log(direction);
         //on transforme le Vector2 ci-dessus en Vector3 en passant 0 en paramètre y car on ne veut pas que le Player bouge sur cet axe
         PlayerDirection2 = new Vector3(direction.x, 0, direction.y); //placer cette ligne dans la fonction a la place de l'Update est plus opti
     }
@@ -104,7 +118,6 @@ public class Player2Behaviour : MonoBehaviour
     {
         isjumping = true; //quand l'input est enclenche, on passe le booleen a true
         Debug.Log("Yes !");
-        //TakeDamage(20);
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext obj)
@@ -182,17 +195,18 @@ public class Player2Behaviour : MonoBehaviour
 
     private Vector3 ApplyJump()
     {
-        //si l'input de saut n'est pas enclenche ou que le Player bouge sur l'axy y
-        if (!isjumping || DirectionToMove2.y != 0)
+        //si l'input de saut est enclenche et que le Player n'est pas deja en train de bouger sur l'axe y
+        if(isjumping && DirectionToMove2.y == 0)
         {
-            return Vector3.zero; //on retourne un vector3 nul -> n'aura aucune incidence sur l'addition des vector3 qui permet de calculer le mouvement du Player
+            //vitesse = racine carre de (hauteur souhaitee x -2 x gravite)
+            //la fonction Mathf.Sqrt() calcul pour nous la racine carree
+            var heightSpeed = Mathf.Sqrt(JumpForce * -2 * Gravity); //on calcule la hauteur du saut du Player en fonction de la force de son saut et de la gravite qui lui est appliquee
+            var JumpVector = new Vector3(0, heightSpeed, 0); //on applique la valeur calculee ci-dessus au parametre Y d'un vector3 -> le saut et la gravite n'agissent que sur l'axe Y du Player
+            return JumpVector; //on retourne le Vector3 calcule ci-dessus pour l'ajouter a l'additon des vector3 permettant de calculer le mouvement du Player
         }
 
-        //vitesse = racine carre de (hauteur souhaitee x -2 x gravite)
-        //la fonction Mathf.Sqrt() calcul pour nous la racine carree
-        var heightSpeed = Mathf.Sqrt(JumpForce * -2 * Gravity); //on calcule la hauteur du saut du Player en fonction de la force de son saut et de la gravite qui lui est appliquee
-        var JumpVector = new Vector3(0, heightSpeed, 0); //on applique la valeur calculee ci-dessus au parametre Y d'un vector3 -> le saut et la gravite n'agissent que sur l'axe Y du Player
-        return JumpVector; //on retourne le Vector3 calcule ci-dessus pour l'ajouter a l'additon des vector3 permettant de calculer le mouvement du Player
+        return Vector3.zero; //sinon, si l'input de saut n'est pas enclenche ou que le Player bouge deja sur l'axe y, on retourne Vector3.zeron
+
     }
 
     /// <summary>
@@ -223,22 +237,15 @@ public class Player2Behaviour : MonoBehaviour
         Instantiate(prefabToInstantiate, hand2Position); //quand la fonction est appelee, on instancie le prefab reference dans l'inspector a la position du gameObject reference en tant qu'handPosition
     }
 
-    public void InstantiateXButton()
-    {
-        Instantiate(XButton);
-    }
-
-    public void DestroyXButton()
-    {
-        Destroy(XButton);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         //si le Player est traverse par un autre objet qui a le tag Food
         if (other.tag == "Food")
         {
             TakeDamage(20); //on lance la fonction TakeDamage() en indiquant que le Player perd 20 points de vie
+
+            var CinemachineScript = CinemachineCam2.GetComponent<CinemachineShake>(); //on recupere le composant CinemachineShake de la Virtual Camera referencee
+            CinemachineScript.ShakeCamera(IntensityCamShake, TimerCamShake); //on applique la fonction ShakeCamera avec comme parametres deux variables float serialisees
         }
     }
 }

@@ -24,10 +24,16 @@ public class Interactable : MonoBehaviour
         //on recupere le composant Transform du GameObject qui a le tag Player1
         var Player1 = GameObject.FindWithTag("Player1");
         var Player1Transform = Player1.GetComponent<Transform>();
+        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
+
+        var Grab1 = Player1Script.grabSomething;
 
         //on recupere le composant Transform du GameObject qui a le tag Player2
         var Player2 = GameObject.FindWithTag("Player2");
         var Player2Transform = Player2.GetComponent<Transform>();
+        var Player2Script = Player2.GetComponent<Player2Behaviour>();
+
+        var Grab2 = Player2Script.grabSomething;
 
         distance1 = Vector3.Distance(Player1Transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
         distance2 = Vector3.Distance(Player2Transform.position, transform.position); //verifie la distance entre le player et l'objet a ramasser
@@ -35,14 +41,21 @@ public class Interactable : MonoBehaviour
         //si le joueur est a moins d'une certaine distance et qu'il n'a pas encore interagi avec l'objet
         if (distance1 <= radius && !hasInteracted)
         {
-            Interact(); //on appelle la fonction Interact
-            hasInteracted = true; //on passe le booléen a true pour indiquer que l'interaction a déjà eu lieu
+            //Il ne se passe quelque chose quand le Player est dans cette zone seulement quand il ne tient rien dans la main
+            if(Grab1 == false)
+            {
+                Interact(); //on appelle la fonction Interact
+                hasInteracted = true; //on passe le booléen a true pour indiquer que l'interaction a déjà eu lieu
+            }
         }
 
         if(distance2 <= radius && !hasInteracted2)
         {
-            Interact2();
-            hasInteracted2 = true;
+            if(Grab2 == false)
+            {
+                Interact2();
+                hasInteracted2 = true;
+            }
         }
 
         //INVENTORY VERSION
@@ -65,13 +78,13 @@ public class Interactable : MonoBehaviour
     public virtual void Interact()
     {
         //Indique ce qu'il va se passer une fois que le joueur a interragi avec l'objet
-        //Debug.Log("interact with " + transform.name);
+        //Le contenu de la fonction est override dans un autre script
     }
 
     public virtual void Interact2()
     {
         //Indique ce qu'il va se passer une fois que le joueur a interragi avec l'objet
-        //Debug.Log("interact with " + transform.name);
+        //Le contenu de la fonction est override dans un autre script
     }
 
 

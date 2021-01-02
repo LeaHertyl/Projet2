@@ -7,20 +7,22 @@ public class Object_Throw : MonoBehaviour
     [SerializeField] private float throwForce;
     [SerializeField] private float radius;
     [SerializeField] private GameObject ExplosionEffect;
+    [SerializeField] private GameObject GroundExplosion;
+    [SerializeField] private GameObject PlayerExplosion;
 
     private bool isthrowing; //on cree un booleen
     private bool isthrowing2;
     private float distance1;
     private float distance2;
     private Rigidbody myRB; //on cree une variable de type Rigibody
-    private GameObject ExplosionToDestroy;
 
-    //private Transform transform;
+    public bool hasExploded;
 
     // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody>(); //on recupere le composant Rigidbody de l'objet auquel ce script est associe
+        hasExploded = false;
     }
 
     // Update is called once per frame
@@ -64,28 +66,55 @@ public class Object_Throw : MonoBehaviour
             myRB.AddForce(Camera2Transform.forward * throwForce);
         }
 
-        //si la position en y de l'objet est inferieure ou egale a -20
-        if(transform.position.y <= -4)
-        {
-            Destroy(gameObject); //on detruit le gameObject associe a ce script -> permet de supprimer les objets quand ils ont ete lance et qu'on ne les voit plus dans la scene et qu'ils ne tombent pas a l'infini
-            Destroy(ExplosionToDestroy); //on detruit le gameObject correspondant aux particules d'explosion pour qu'elles se détruisent en même temps que l'objet
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //si l'objet avec lequel l'objet auquel est associe ce script trigger a le tag "Ground"
         if(other.gameObject.tag == "Ground")
         {
-            Explod(); //on appelle la fonction Explod() quand l'objet en trigger un autre
+            Instantiate(GroundExplosion,transform.position, transform.rotation); //on instancie le GameObject contenant l'audio source correspondant
+            Explod(); //on lance la fonction Explod()
+        }
+
+        //si l'objet avec lequel l'objet auquel est associe ce script trigger a le tag "Player1" ou le tag "Player2"
+        if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2")
+        {
+            Instantiate(PlayerExplosion, transform.position, transform.rotation); //on instancie le GameObject contenant l'audio source correspondant
+            Explod(); //on lance la fonction Explod()
         }
     }
 
     private void Explod()
     {
+        var Player1 = GameObject.FindWithTag("Player1");
+        var Player1Script = Player1.GetComponent<PlayerBehaviour>();
+
+        var grab1 = Player1Script.grabSomething;
+
+        var Player2 = GameObject.FindWithTag("Player2");
+        var Player2Script = Player2.GetComponent<Player2Behaviour>();
+
+        var grab2 = Player2Script.grabSomething;
+
+        if (grab1 == true)
+        {
+            Player1Script.grabSomething = false;
+        }
+
+        if(grab2 == true)
+        {
+            Player2Script.grabSomething = false;
+        }
+
         //on stock l'objet qu'on va instancier dans une variable pour pouvoir l'appeler et y faire reference ailleurs
-        ExplosionToDestroy = Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
+        Instantiate(ExplosionEffect, transform.position, transform.rotation); //on instancie l'effet de particules d'explosion au même endroit que l'objet auquel ce script est associe
+        Destroy(gameObject); //on detruit le GameOject
     }
 
+    /// <summary>
+    /// fonction pour afficher les gizmos et mieux visualiser la zone d'interaction de l'objet
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
