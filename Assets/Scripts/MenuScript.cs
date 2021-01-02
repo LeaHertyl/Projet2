@@ -29,7 +29,7 @@ public class MenuScript : MonoBehaviour
     public void quitBouton()
     {
         Debug.Log("Ferme le jeu");
-        //Application.Quit();//Ferme et Arrête l'application
+        Application.Quit();//Ferme et Arrête l'application
     }
 
     public void ChargementBeforeScene(string SceneToLoad) // permet de choisir la scene que nous voulons charger lors de l'activation du bouton
